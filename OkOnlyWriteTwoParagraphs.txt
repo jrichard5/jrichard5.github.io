@@ -1,0 +1,52 @@
+My name is [name], and I was born and raised in [city], Louisiana. 
+My best subject in school was mathematics, and my hobby was playing video games. 
+I always received A's in math and was in the top 2% of the country for the ACT.
+Many people recommended programming as a career path to me because of my passion for video games. 
+However, while researching other math-related fields, I always had a major concern about whether programs could actually do the work. 
+Despite this concern, I recognized the value and versatility of programming, as it is used in many different sectors.
+As a result, I confidently decided that majoring in some form of programming would be the best choice for me.
+
+
+
+
+My first experience with programming was with a hand-me-down textbook my brother gave me about C++. 
+Reading this book helped me gain an overview of programming concepts at a time when I knew nothing. 
+I learned about variables, classes, libraries, functions, algorithms, and more. 
+This gave me a solid understanding of Object-oriented programming before I even took a college course on it.
+
+This self-study experience shows my motivation for learning programming. 
+It also gave me a head start when I entered college. 
+Having the basic concepts of programming already down, I was able to focus on learning new concepts and integrating them into my foundation of programming knowledge.
+
+College greatly increased my programming knowledge. 
+I was introduced to high-level languages like Java and C#, as well as the basics of web development. 
+The most surprising topic was project management, which explained the investment required to make software. 
+I learned about Agile, requirement analysis, and the risks associated with developing software.
+
+Writing always felt like my weakest skill, and I had to persevere through various tasks in college that targeted it. 
+With an abundance of effort, despite the lack of motivation, I always ended up with a paper I was proud of.
+
+My 3.95 GPA is proof of my perseverance, effort, and cumulative knowledge throughout my college career.
+
+<br>Also mention how I finished in 3 years, since I did summer courseses, so no time for internethispsfhaip
+
+        <div id="courseList">
+            <h2>Revelant College Courses</h5>
+            <ul>
+                <li>Internet Foundation (HTML/CSS)</li>
+                <li>Computer Networks (Basics of Networking)</li>
+                <li>Programming Logic (Java)</li>
+                <li>Linux Administration</li>
+                <li>Database Concepts and Applications 1 and 2(SQL)</li>
+                <li>Object-Oriented Programming 1 and 2 (Java)</li>
+                <li>Web Scripting (Javascript)</li>
+                <li>Python Programming</li>
+                <li>System Administration Scripting (Powershell)</li>
+                <li>C# Programming</li>
+                <li>Mobile Application Development (Android Studio)</li>
+                <li>Software Testing (Selenium)</li>
+                <li>Information Technology Project Management</li>
+                <li>Business Systems Analysis</li>
+                <li>Advanced Web Development (PHP)</li>
+                <li>Capstone Project (self-learned REACT for front-end, PHP for back-end)</li>
+            </ul>

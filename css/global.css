@@ -1,7 +1,209 @@
-header{
-    background-color: black;
+:root{
+    --widthOfSideNavBar: 200px;
+    --widthOfHeaderSideItems: 20%;
+    --spaceBetweenSections:200px;
+}
+
+body{
+    /*background-color: #202123;*/
+    background-color: #353441;
     color: whitesmoke;
-    margin:auto;
+    /*border-style: solid;*/
+    font-family: Verdana, sans-serif;
+    line-height: 2;
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    /*background-color: #202123;*/
+    background-color:#262730;
+    text-align: center;
+    /*border-style: solid;*/
+    margin-left: calc(var(--widthOfSideNavBar) - 2px);
+    margin-top: -8px;
+    margin-right: -8px;
+    padding-left: 2px;
+}
+
+footer{
+    background-color: black;
+    text-align: center;
+    margin-left: 192px;
+    margin-bottom: -8px;
+    margin-right: -8px;
+    margin-top: var(--spaceBetweenSections);
+}
+
+
+
+main{
+    background-color: #353441;
+    /*border-style: solid;*/
+    margin-left: 210px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+main h1{
+text-align:center; 
+}
+
+h2{
+    text-align: center;
+    margin-top: var(--spaceBetweenSections);
+}
+
+a:visited{
+    color: whitesmoke;
+}
+
+/*Class Selectors*/
+.sidenav{
+    position:fixed;
+    height: 101%;
+    /*top right, bottom left*/
+    margin: -8px 0px -0px -8px;
+    width: var(--widthOfSideNavBar);
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #202123;
+    border-style: solid;
+    border-color: #202123;
+}
+
+.sidenav a{
+    text-align: center;
+    font-size:xx-large;
+    padding: 32px;
+    border-radius: 15%;
+    background-color: #202123;
+    
+}
+
+.sidenav a:link{
+    color: whitesmoke;
+    text-decoration: none;
+}
+.sidenav a:visited
+{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.sidenav a:hover{
+    background-color: #353441;
+    border-radius: 45%;
+    transition: background-color, border-radius 0.5s ease-out;
+}
+
+.sidenote{
+    font-size: x-small;
+}
+
+.tab{
+    text-indent: 20px;
+}
+
+.centerText{
     text-align: center;
 }
+.allTextDecorations{
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.greenText{
+    color: green;
+}
+.bold{
+    font-weight: bold;
+}
+.insideCollapsible{
+    line-height: 1.5;
+    margin: 16px;
+    font-size: small;
+}
+
+/*Id selector*/
+#courseList{
+    text-align: left;
+}
+
+#contact{
+    margin-top: auto;
+    padding-right: 8px;
+    text-align: right;
+    font-size: smaller;
+    width: var(--widthOfHeaderSideItems);
+}
+
+#emptyspace{
+    width: var(--widthOfHeaderSideItems);
+    padding-left: 8px;
+}
+
+/*
+#socialmedia{
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    margin-top: 100px;
+}
+*/
+#socialMedia{
+    margin-top: 16px;
+}
+#socialMedia a{
+    margin-left: 16px;
+}
+#classList{
+    line-height: 1.5;
+    margin: 16px;
+    font-size: small;
+}
+#resume{
+    line-height: 1.25;
+    border: solid;
+    border-width: 2px;
+    border-color: #101010;
+    padding: 32px;
+    box-shadow: 8px 8px 16px black;
+}
+
+
+/*https://www.w3schools.com/howto/howto_js_collapsible.asp*/
+
+.collapsible{
+    width: 100%;
+    color: whitesmoke;
+    background-color: #202123;
+    padding: 20px;
+    border: none;
+    text-align: left;
+}
+.collapsibleContent {
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
+    background-color: #262730;
+  }
+
+.active, .collapsible:hover{
+    background-color: black;
+}
+
+.collapsible:after {
+    content: '\002B';
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2212";
+  }
 

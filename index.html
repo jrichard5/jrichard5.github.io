@@ -1,14 +1,224 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/global.css">
+    <script src="js/collapsible.js"></script>
     <title>
         Github Page for my website (J.R.)
     </title>
 </head>
 <body>
+    <div class="sidenav">
+        <a href="#">Home</a>
+        <a href="#">Resume</a>
+        <a href="#">Projects</a>
+        <a href="#">Personal</a>
+        <a href="#">Exercises</a>
+    </div>
     <header>
-        <h1>Jeremiah Richard</h1>
-        <h4>Bachelor of Science in Computer Programming</h4>
+        <div id="emptyspace">
+        </div>
+        <div id="hearderHeaders">
+            <h1>Jeremiah Richard</h1>
+            <h4>Bachelor of Science in Computer Programming</h4>
+        </div>
+        <div id="contact">
+            Email: ad;klfal;skd@390249023</br>
+            Phone:  <span class="phoneNumber">123123 132123</span></br>
+            <div id="socialMedia">
+                <a href="https://www.linkedin.com/in/jeremiah-r-7815961a3/"><img src="assets/LI-In-Bug (2).png" alt="LinkedIn" height="40px" width="50px"></a>
+                <a href="https://github.com/jrichard5"><img src="assets/github-mark-white.png" alt="Github Favicon" height="40px" width="40px"></a>
+            </div>
+            
+        </div>
     </header>
+
+    <main>
+        <h2>About Me</h2>
+        <p class="tab">
+            Hi there! As a recent graduate with a passion for back-end development, I'm excited to pursue a career in software engineering. 
+            During my internship, I was tasked with developing and maintaining the back-end of a complex web application, and I loved every minute of it which solidified my passion for programming. 
+            While I appreciate the importance of front-end development, my true passion lies in the back-end, where I can apply my technical expertise to create efficient, scalable, and reliable systems.
+            I'm always eager to learn and take on new challenges, and I work well both independently and as part of a team. 
+            I'm excited to bring my skills and enthusiasm to a new opportunity in software development, and I look forward to discussing how I can contribute to your team.
+        </p>
+        <p class="sidenote">
+            **Through utilizing cutting-edge language technology such as ChatGPT, I have been able to significantly improve the quality of my written content.
+        </p>
+
+        <div id="resume2131">
+            <h2>My Resume</h2>
+            <div id="resume">
+                <div>
+                    <h1>Jeremiah Richard</h1>
+                    <div class="centerText">#### [......] Street Metairie, LA 70006  &#183  <span class="phoneNumber">(###)-###-####</span></div>
+                    <p class="greenText centerText">
+                        jeremiahrichard1@gmail.com &#183 https://www.linkedin.com/in/jeremiah-r-7815961a3/ &#183 https://github.com/jrichard5 &#183 https://jrichard5.github.io/
+                    </p>
+                </div>
+                <div>
+                    <p class="allTextDecorations">
+                        PROFESSIONAL PROFILE
+                    </p>
+                    <p>
+                        Results-oriented programmer with growing knowledge of Java, Python, HTML, CSS, SQL, C++, and C#. 
+                        Graduated from Herzing University with a 3.95 GPA and received a Bachelor of Science in Computer 
+                        Programming. Completed a .NET/C# internship at Rural Sourcing that helped bridge knowledge gaps 
+                        between college and a work environment. Experienced in problem-solving, implementing new ideas,
+                        and process changes with peers. Highly communicative and enjoys working in teams.
+                    </p>
+                </br>
+                </div>
+                <div>
+                    <p class="allTextDecorations">
+                        EXPERIENCE
+                    </p>
+                    <div class="bold">
+                        2022 SEPTEMBER – 2022 DECEMBER
+                    </div>
+                        <span class="greenText">.NET INTERN,</span> RURAL SOURCING
+                        <ul>
+                            <li>
+                                Created a backend API using C# in a team setting with supporting technologies, such as Entity 
+                                Framework, ASP.NET Core, Fluent Validation, and Swashbuckle.                            
+                            </li>
+                            <li>
+                                Engaged in Scrum ceremonies to turn business requirements into a working solution while 
+                                refining our development process.
+                            </li>
+                            <li>
+                                Conducted research on new technologies and documented findings to increase team knowledge
+                            </li>
+                            <li>
+                                Proficient with Git and Jira as collaborative communication tools.
+                            </li>
+                        </ul>
+                    </br>
+                    <div class="bold">
+                        2018 – 2022 AUGUST
+                    </div>
+                        <span class="greenText">JANTIOR,</span> YONSEI MARTIAL ARTS ACADEMY
+                        <ul>
+                            <li>
+                                Routinely clean the premises during off-hours
+                            </li>
+                            <li>
+                                Worked autonomously with minimal direction.
+                            </li>
+                            <li>
+                                Conducted IT maintenance by creating shares and troubleshooting drivers.
+                            </li>
+                        </ul>
+                    </br>
+                </div>
+                <div>
+                    <p class="allTextDecorations">
+                        EDUCATION
+                    </p>
+                    <div class="bold">GRADUATED: AUGUST 2022</div>
+                    <div class="greenText">HERZING UNIVERSITY</div>
+                    <div>Bachelor of Science in Computer Programming</div>
+                    <div>GPA: 3.95</div>
+                    </br>
+                </div>
+            <div>
+                <p class="allTextDecorations">TECHNOLOGY PROFICIENCIES</p>
+                <ul>
+                    <li>C#</li>
+                    <li>Java</li>
+                    <li>SQL</li>
+                    <li>HTML/CSS</li>
+                    <li>PHP</li>
+                    <li>C++</li>
+                    <li>Python</li>
+                    <li>Selenium</li>
+                </ul>
+                </br>
+            </div>
+            <div>
+                <p class="allTextDecorations">ACTIVITIES</p>
+                <p>Enthusiastic about computer gaming with a healthy passion for mathematics. Analyze how things in the 
+                    real world could be translated to programs using math. Exploring multiple distros of Linux and would 
+                    love to give back to the programming world by writing open-source code for Linux.</p>
+            </div>
+            </div>
+        </div>
+
+        <h2>Extra Facts!</h2>
+        <div>
+            <button type="button" class="collapsible">Relevant Courses Taken in College</button>
+            <div class="collapsibleContent">
+                <ul id="classList">
+                    <li>Internet Foundation (HTML/CSS)</li>
+                    <li>Computer Networks (Basics of Networking)</li>
+                    <li>Programming Logic (Java)</li>
+                    <li>Linux Administration</li>
+                    <li>Database Concepts and Applications 1 and 2(SQL)</li>
+                    <li>Object-Oriented Programming 1 and 2 (Java)</li>
+                    <li>Web Scripting (Javascript)</li>
+                    <li>Python Programming</li>
+                    <li>System Administration Scripting (Powershell)</li>
+                    <li>C# Programming</li>
+                    <li>Mobile Application Development (Android Studio)</li>
+                    <li>Software Testing (Selenium)</li>
+                    <li>Information Technology Project Management</li>
+                    <li>Business Systems Analysis</li>
+                    <li>Advanced Web Development (PHP)</li>
+                    <li>Capstone Project (self-learned REACT for front-end, PHP for back-end)</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">Experience at my internship</button>
+            <div class="collapsibleContent">what????</div>
+            <button type="button" class="collapsible">Things I'm currently Learning</button>
+            <div class="collapsibleContent">
+                <ul id="classList">
+                    <li>Unreal Engine (Udemy Course, copyrighted so cannot put on a public GitHub)</li>
+                    <li>PortSwigger's Academy (Pentesting)</li>
+                    <li>CompTIA Security+ (https://www.youtube.com/watch?v=9Hd8QJmZQUc)</li>
+                    <li>Japanese xD</li>
+                    <li>AWS or Azure(since I like C#)</li>
+                </ul>
+                <p class="insideCollapsible">Projects I want to work on to Learn new things</p>
+                <ul id="classList">
+                    <li>This Personal Website</li>
+                    <li>Add unique Javascript / CSS section to practice web design</li>
+                    <li>Create a Clean Archiecture Template for a backend (C# + .NET Web API + PostgreSQL + EntityFramework)</li>
+                    <li>Parse a Japanese to English Dictionary to fill Database with data - (C#)</li>
+                    <li>Make a notecard application using this data (set of set of notecards)</li>
+                    <li>
+                        Make a notecard desktop app for Linux that makes it easy to make a notecard
+                        <ul>
+                            <li>When browsing web, sometimes I learn I misrememberd, and want to create notecards to help remember</li>
+                            <li>Sets a timer and currect correct streak for each card</li>
+                            <li>Uses long term memory research to set timer for correct streak</li>
+                            <li>This would be a system alot like the website WaniKuni but instead of learning Kanji(Japanese), it is more custom</li>
+                        </ul>
+                    </li>
+                    <li>Remake this site using REACT (or any hot new tech)</li>
+                    <li>Make Android Japanese Notecard App (Mobile/Android Studio)</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">My Custom Keyboards</button>
+            <div class="collapsibleContent">what???</div>
+
+        </div>
+
+        <h2>Exercises</h2>
+        <p>Since people may not want to deal with random JS effects, I will put these on a separate webpage</p>
+        <a href="#">Click Here for the Exercise page (not yet)</a>
+
+    </main>
+    <footer>
+        <p>Let's Connect!!!</p>
+        <div id="contactFooter">
+            Email: ad;klfal;skd@390249023</br>
+            Phone:  <span class="phoneNumber">123123 132123</span></br>
+            <div id="socialMedia">
+                <a href="https://www.linkedin.com/in/jeremiah-r-7815961a3/"><img src="assets/LI-In-Bug (2).png" alt="LinkedIn" height="40px" width="50px"></a>
+                <a href="https://github.com/jrichard5"><img src="assets/github-mark-white.png" alt="Github Favicon" height="40px" width="40px"></a>
+            </div>
+        </div>
+    </footer>
+
+
 </body>
-"Hello World"??
