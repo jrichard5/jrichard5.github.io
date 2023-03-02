@@ -1,9 +1,16 @@
+//import addActive from './nav.js';
+
+
 //Used Information here to make the collapsible feature
 //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible_animate
+
+
+
 
 window.onload = function() {
     makeCollaspable();
     injectStrings();
+    addActive();
 }
 
 
@@ -43,3 +50,58 @@ function makeCollaspable(){
 }
 
 
+
+
+
+
+//Supposely you cannot import when browseing the file locally, yaya js.
+
+function addActive() {
+    var h2Sections = document.getElementsByTagName("h2");
+    var sideNavBarArray = document.getElementsByClassName("sidenav")[0].getElementsByTagName("a");
+    var h2SectionsYLoc;
+    var viewPortHeightCap = window.innerHeight * .5;
+    var indexOfArrow;
+    sideNavBarArray[0].classList.add('sideNavActive');
+
+    document.addEventListener("scroll", ()=> {
+        var locOfArrow;
+        //Need to assign locOfArrow to the h2 unless the new header is 30% of the viewport
+        
+        //This for loop finds the h2 section index that is less than .5 of viewport height but greater than all the other h2 sections
+        for (var i = 0; i < h2Sections.length; i++){
+            const rect = h2Sections[i].getBoundingClientRect();
+            console.log(rect.top);
+            if(locOfArrow == undefined){
+                locOfArrow = h2Sections[0];
+                indexOfArrow = 0;
+            }
+            if (rect.top <= viewPortHeightCap)
+            {
+                //if top is viewportheight cap or above, we want to assign it to active
+                //check against other viewports to make sure we have the largest one (aka we would want 10%, not -10% or -30% if this even does that....)
+                if (rect.top > locOfArrow.getBoundingClientRect().top)
+                {
+                    locOfArrow = h2Sections[i];
+                    indexOfArrow = i;
+                }
+                
+            }
+            
+                //h2Sections[i].classList.remove('active');
+                //Don't remove if the lastIndexOfArrow
+                //sideNavBarArray[i].classList.remove('sideNavActive'); 
+        }
+        //Modifies the class of the sidebar a tag based on previous for loop.  Previously, it removing the class and re-adding it would always trigger the transition
+        for (var i = 0; i<h2Sections.length; i++){
+            if (indexOfArrow == i){
+                sideNavBarArray[indexOfArrow].classList.add('sideNavActive');
+            }else{
+                sideNavBarArray[i].classList.remove('sideNavActive'); 
+            }
+        }
+        //locOfArrow.classList.add('active');
+        //sideNavBarArray[indexOfArrow].classList.add('sideNavActive');
+
+    })
+}
