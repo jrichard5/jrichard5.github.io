@@ -101,11 +101,16 @@ function sideNavClicks(){
     const sideNav = document.querySelector(".sidenav");
 
     sideNav.addEventListener('click', function(e){
-        e.preventDefault();
+        
         if (e.target.tagName === 'A' && e.target.getAttribute('data-target')){
+            e.preventDefault();
             const targetId = e.target.getAttribute('data-target');
             const target = document.getElementById(targetId);
             target.scrollIntoView({behavior: 'smooth'});
+        }
+        else{
+            e.preventDefault();
+            document.getElementById('header').scrollIntoView({behavior: 'smooth'});
         }
     })
 }
