@@ -2,6 +2,7 @@
     --widthOfSideNavBar: 200px;
     --widthOfHeaderSideItems: 20%;
     --spaceBetweenSections:200px;
+    --gifThingy: calc(var(--widthOfSideNavBar) + 10%)
 }
 
 body{
@@ -127,6 +128,12 @@ a:visited{
     margin: 16px;
     font-size: small;
 }
+
+.pCollapsibleContent{
+    line-height: 1.5;
+    margin: 16px;
+    font-size: small;
+}
 #resume{
     line-height: 1.25;
     border: solid;
@@ -226,4 +233,62 @@ a:visited{
     background-color: #353441;
     border-radius: 45%;
     transition: background-color, border-radius 0.5s ease-out;
+}
+
+.keyboardContentList{
+    columns: 2 13em;
+    font-size: small;
+    margin: auto 0 auto 0;
+}
+
+.keyboardContentLeft{
+    margin: 64px;
+    display: flex;
+    /*border-image: linear-gradient(to left, transparent, black, transparent) 5;*/
+}
+
+
+.keyboardContentRight{
+    margin: 64px;
+    display: flex;
+    float: right;
+}
+
+hr{
+    width: 90%;
+}
+
+
+.kb3gifDiv{
+}
+.kbgifContent{
+    display: none;
+    position: absolute;
+    left: var(--gifThingy);
+    background-color: #262730;
+    padding: 32px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+/*https://www.youtube.com/watch?v=pgMIp4ghGr0
+    This video shows how to make the arrow 
+.kbgifContent:after{
+    width: 200px;
+    height: 200px;
+    margin-left: -25px;
+    content: '';
+    transform: rotate(45deg);
+    border: solid;
+    border-color:#ff0;
+    left: 50%;
+}
+*/
+
+
+#rainbowKBDiv{
+    cursor: pointer;
+}
+
+#rainbowKBDiv:hover .kbgifContent{
+    display: block
 }

@@ -50,3 +50,12 @@ My 3.95 GPA is proof of my perseverance, effort, and cumulative knowledge throug
                 <li>Advanced Web Development (PHP)</li>
                 <li>Capstone Project (self-learned REACT for front-end, PHP for back-end)</li>
             </ul>
+
+
+My internship at Rural Sourcing was one of the most amazing and educational experiences I have ever been apart of.
+  I gained valuable experience in software development and the .NET ecosystem, and explored a range of technologies such as EntityFramework, ASP.NET Web API, xUnit, FluentValidation, and Swagger, and got to experience working on a team with other interns.
+We also did the scrum ceremonies of sprint planning, daily stand-up, sprint review, and sprint retrospective to help turn requirements into concrete actions.
+We did one week sprints to consistently practice the scrum ceremonies every week.  
+I was fortunate to be assigned a variety of tasks, during these one week sprints which gave me experience in all the technologies.
+Before this internship, I questioned whether I was ready for the workload required in a real-world software development position.  
+Thanks to this internship experience, I now feel confident in my ability to learn new technologies and integrate valuable fixes and features into a software development project.

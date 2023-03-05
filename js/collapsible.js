@@ -11,6 +11,7 @@ window.onload = function() {
     makeCollaspable();
     injectStrings();
     addActive();
+    sideNavClicks();
 }
 
 
@@ -21,8 +22,6 @@ function injectStrings(){
     var phoneNumberSpans = document.getElementsByClassName("phoneNumber")
     for(element of phoneNumberSpans)
      {
-        console.log("hi");
-        console.log(element.innerHTML);
         element.innerHTML = phoneNumber;
     };
 }
@@ -39,7 +38,6 @@ function makeCollaspable(){
         {
             this.classList.toggle("active");
             var content= this.nextElementSibling;
-            console.log(content.style.maxHeight);
             if (content.style.maxHeight){
                 content.style.maxHeight = null;
             } else {
@@ -57,11 +55,10 @@ function makeCollaspable(){
 //Supposely you cannot import when browseing the file locally, yaya js.
 
 function addActive() {
-    var h2Sections = document.getElementsByTagName("h2");
-    var sideNavBarArray = document.getElementsByClassName("sidenav")[0].getElementsByTagName("a");
-    var h2SectionsYLoc;
-    var viewPortHeightCap = window.innerHeight * .5;
-    var indexOfArrow;
+    let h2Sections = document.getElementsByTagName("h2");
+    let sideNavBarArray = document.getElementsByClassName("sidenav")[0].getElementsByTagName("a");
+    let viewPortHeightCap = window.innerHeight * .5;
+    let indexOfArrow;
     sideNavBarArray[0].classList.add('sideNavActive');
 
     document.addEventListener("scroll", ()=> {
@@ -71,7 +68,6 @@ function addActive() {
         //This for loop finds the h2 section index that is less than .5 of viewport height but greater than all the other h2 sections
         for (var i = 0; i < h2Sections.length; i++){
             const rect = h2Sections[i].getBoundingClientRect();
-            console.log(rect.top);
             if(locOfArrow == undefined){
                 locOfArrow = h2Sections[0];
                 indexOfArrow = 0;
@@ -87,10 +83,6 @@ function addActive() {
                 }
                 
             }
-            
-                //h2Sections[i].classList.remove('active');
-                //Don't remove if the lastIndexOfArrow
-                //sideNavBarArray[i].classList.remove('sideNavActive'); 
         }
         //Modifies the class of the sidebar a tag based on previous for loop.  Previously, it removing the class and re-adding it would always trigger the transition
         for (var i = 0; i<h2Sections.length; i++){
@@ -100,8 +92,20 @@ function addActive() {
                 sideNavBarArray[i].classList.remove('sideNavActive'); 
             }
         }
-        //locOfArrow.classList.add('active');
-        //sideNavBarArray[indexOfArrow].classList.add('sideNavActive');
 
+    })
+}
+
+
+function sideNavClicks(){
+    const sideNav = document.querySelector(".sidenav");
+
+    sideNav.addEventListener('click', function(e){
+        e.preventDefault();
+        if (e.target.tagName === 'A' && e.target.getAttribute('data-target')){
+            const targetId = e.target.getAttribute('data-target');
+            const target = document.getElementById(targetId);
+            target.scrollIntoView({behavior: 'smooth'});
+        }
     })
 }
