@@ -1,8 +1,5 @@
 :root{
-    --widthOfSideNavBar: 200px;
-    --widthOfHeaderSideItems: 20%;
     --spaceBetweenSections:200px;
-    --gifThingy: calc(var(--widthOfSideNavBar) + 10%)
 }
 
 body{
@@ -27,23 +24,9 @@ header{
     padding-left: 2px;
 }
 
-footer{
-    background-color: black;
-    text-align: center;
-    margin-left: 192px;
-    margin-bottom: -8px;
-    margin-right: -8px;
-    margin-top: var(--spaceBetweenSections);
-}
-
-
-
 main{
     background-color: #353441;
     /*border-style: solid;*/
-    margin-left: 210px;
-    padding-left: 20%;
-    padding-right: 20%;
 }
 
 main h1{
@@ -55,19 +38,12 @@ h2{
     margin-top: var(--spaceBetweenSections);
 }
 
-a:visited{
-    color: whitesmoke;
+.tab{
+    text-indent: 20px;
 }
-
-/*Class Selectors*/
-
 
 .sidenote{
     font-size: x-small;
-}
-
-.tab{
-    text-indent: 20px;
 }
 
 .centerText{
@@ -85,10 +61,100 @@ a:visited{
 .bold{
     font-weight: bold;
 }
+
+/*https://www.w3schools.com/howto/howto_js_collapsible.asp*/
+
+.collapsible{
+    width: 100%;
+    color: whitesmoke;
+    background-color: #202123;
+    padding: 20px;
+    border: none;
+    text-align: left;
+}
+.collapsibleContent {
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
+    background-color: #262730;
+  }
+
+.active, .collapsible:hover{
+    background-color: black;
+}
+
+.collapsible:after {
+    content: '\002B';
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+  
+.active:after {
+    content: "\2212";
+}
+
+.pCollapsibleContent{
+    line-height: 1.5;
+    margin: 16px;
+    font-size: small;
+}
 .insideCollapsible{
     line-height: 1.5;
     margin: 16px;
     font-size: small;
+}
+
+#classList{
+    line-height: 1.5;
+    margin: 16px;
+    font-size: small;
+}
+
+footer{
+    background-color: black;
+    text-align: center;
+    margin-left: -8px;
+    margin-bottom: -8px;
+    margin-right: -8px;
+    margin-top: var(--spaceBetweenSections);
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+@media (min-width: 800px) {
+:root{
+    --widthOfSideNavBar: 200px;
+    --widthOfHeaderSideItems: 20%;
+    --gifThingy: calc(var(--widthOfSideNavBar) + 10%)
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    /*background-color: #202123;*/
+    background-color:#262730;
+    text-align: center;
+    /*border-style: solid;*/
+    margin-left: calc(var(--widthOfSideNavBar) - 2px);
+    margin-top: -8px;
+    margin-right: -8px;
+    padding-left: 2px;
+}
+
+footer{
+    margin-left: 192px;
+}
+
+main{
+    margin-left: 210px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+a:visited{
+    color: whitesmoke;
 }
 
 /*Id selector*/
@@ -129,11 +195,7 @@ a:visited{
     font-size: small;
 }
 
-.pCollapsibleContent{
-    line-height: 1.5;
-    margin: 16px;
-    font-size: small;
-}
+
 #resume{
     line-height: 1.25;
     border: solid;
@@ -142,41 +204,6 @@ a:visited{
     padding: 32px;
     box-shadow: 8px 8px 16px black;
 }
-
-
-/*https://www.w3schools.com/howto/howto_js_collapsible.asp*/
-
-.collapsible{
-    width: 100%;
-    color: whitesmoke;
-    background-color: #202123;
-    padding: 20px;
-    border: none;
-    text-align: left;
-}
-.collapsibleContent {
-    max-height: 0;
-    transition: max-height 0.2s ease-out;
-    overflow: hidden;
-    background-color: #262730;
-  }
-
-.active, .collapsible:hover{
-    background-color: black;
-}
-
-.collapsible:after {
-    content: '\002B';
-    font-size: 13px;
-    color: white;
-    float: right;
-    margin-left: 5px;
-  }
-  
-  .active:after {
-    content: "\2212";
-  }
-
 
 .sidenav a{
     text-align: center;
@@ -258,6 +285,11 @@ hr{
     width: 90%;
 }
 
+.kbpic{
+    width:306px;
+    height:229px
+}
+
 
 .kb3gifDiv{
 }
@@ -269,6 +301,8 @@ hr{
     padding: 32px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    width:180px;
+    height:135px
 }
 /*https://www.youtube.com/watch?v=pgMIp4ghGr0
     This video shows how to make the arrow 
@@ -291,4 +325,6 @@ hr{
 
 #rainbowKBDiv:hover .kbgifContent{
     display: block
+}
+
 }

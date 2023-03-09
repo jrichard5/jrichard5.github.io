@@ -1,0 +1,46 @@
+@media (max-width: 799px) {
+    .sidenav{
+        display:none;
+    }
+
+    header{
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    main{
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .keyboardContentList{
+        columns: 1 13em;
+        font-size: small;
+        margin: auto 0 auto 0;
+    }
+    
+    .keyboardContentLeft{
+        margin: 16px;
+        display: flex;
+        /*border-image: linear-gradient(to left, transparent, black, transparent) 5;*/
+    }
+    
+    
+    .keyboardContentRight{
+        margin: 16px;
+        display: flex;
+        float: right;
+    }
+    
+    hr{
+        width: 97%;
+    }
+    
+    .kbpic{
+        width: 48%;
+        height: 36%
+    }
+    .kbgifContent{
+        display: none;
+    }
+}

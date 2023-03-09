@@ -1,0 +1,58 @@
+:root{
+    --widthOfHeaderSideItems: 20%
+}
+
+body{
+    background-color: #353441;
+    color: whitesmoke;
+    font-family: Verdana, sans-serif;
+    line-height: 2;
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    background-color:#262730;
+    text-align: center;
+    margin: -8px;
+}
+
+#emptyspace{
+    width: var(--widthOfHeaderSideItems);
+    padding-left: 8px;
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#contact{
+    margin-top: auto;
+    padding-right: 8px;
+    text-align: right;
+    font-size: smaller;
+    width: var(--widthOfHeaderSideItems);
+}
+
+main{
+    background-color: #353441;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+h2{
+    text-align: center;
+
+}
+
+#pagesDiv{
+    margin: auto;
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-bottom: 30%;
+}
+
+footer{
+    background-color: black;
+    text-align: center;
+    margin: -8px;
+}
