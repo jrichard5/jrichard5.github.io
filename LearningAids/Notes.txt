@@ -1,0 +1,4 @@
+### https://angular.io/guide/testing
+
+ng generate config karma
+dont even need config file,  ng test --no-watch --no-progress     in github action.... but doesn't work, so need to do a script
