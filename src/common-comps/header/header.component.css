@@ -1,0 +1,34 @@
+header{
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+#emptyHeaderSpace{
+    border-style: dashed;
+    border-color: red;
+    width: 15%;
+}
+
+#mainHeaderCenter{
+    margin: auto;
+    text-align: center;
+}
+h1{
+    font-size:40pt;
+    padding: 5%;
+}
+h2{
+    font-size: 20pt;
+}
+#contactInfoSection{
+    text-align: right;
+    margin-top: auto;
+    border-style: dashed;
+    border-color: red;
+    width: 15%;
+}
+#contactInfoSection a{
+    padding: 0px 8px;
+}
