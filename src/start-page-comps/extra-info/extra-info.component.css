@@ -1,0 +1,29 @@
+
+
+.keyboardContentDiv{
+    display: flex;
+    margin: 0% 7% 0% 8%;
+}
+
+.kbpicDivContainer{
+    flex-grow: 1;
+    flex-basis:0;
+}
+
+.kbpic{
+    width:306px;
+    height:229px;
+    
+}
+
+.keyboardContentList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis:0;
+}
+
+#extraInfoContainer{
+    margin: 5% 0% 15% 0%;
+}

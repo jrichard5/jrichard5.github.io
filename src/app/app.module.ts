@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonCompsModule } from 'src/common-comps/common-comps.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { StartPageCompsModule } from 'src/start-page-comps/start-page-comps.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     CommonCompsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    StartPageCompsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

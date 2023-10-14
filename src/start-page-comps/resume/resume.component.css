@@ -1,0 +1,8 @@
+#resumeContainerDiv{
+    display: flex;
+    justify-content: center;
+}
+
+.something{
+    border: 2pt solid white;
+}

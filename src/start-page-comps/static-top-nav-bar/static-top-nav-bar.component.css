@@ -1,0 +1,27 @@
+mat-toolbar{
+    background-color: black;
+    border-top: 2pt solid #888888;
+}
+mat-toolbar-row{
+    justify-content: space-evenly;
+}
+
+a{
+    padding: 16px;
+    border-radius: 15%;
+}
+
+a:link{
+    color: white;
+    text-decoration: none;
+}
+a:visited
+{
+    color: white;
+    text-decoration: none;
+}
+a:hover{
+    background-color: #353441;
+    border-radius: 20%;
+    transition: background-color, border-radius 0.2s ease-out;
+}
