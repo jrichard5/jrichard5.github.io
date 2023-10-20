@@ -4,8 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonCompsModule } from 'src/common-comps/common-comps.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+//import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StartPageCompsModule } from 'src/start-page-comps/start-page-comps.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { StartPageCompsModule } from 'src/start-page-comps/start-page-comps.modu
     BrowserModule,
     AppRoutingModule,
     CommonCompsModule,
-    NoopAnimationsModule,
+    //NoopAnimationsModule,
+    BrowserAnimationsModule,
     StartPageCompsModule
   ],
   providers: [],

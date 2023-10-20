@@ -1,1 +1,20 @@
-<p>slideshow-comp works!</p>
+<mat-spinner *ngIf="jsonSubscription$ && (!isFiveSecLoad || !jsonSubscription$.closed)" mode="indeterminate" value="5">
+</mat-spinner>
+
+<div *ngIf="jsonSubscription$ && jsonSubscription$.closed && isFiveSecLoad">
+    <app-project-nav-comp [projectNames]="projectTitles"></app-project-nav-comp>
+    <h2>{{currentProject?.projectTitle}}</h2>
+    <div id="slideShowContainer">
+        <button>left</button>
+        <div id="pictureForSlideShow">
+            <img [src]="currentSlide?.picture">
+        </div>
+        
+        <div id="descriptionForSlideShow">
+            <ul>
+                <li *ngFor="let list of currentDescriptionArray"> {{list}}</li>
+            </ul>
+        </div>  
+        <button>right</button>
+    </div>
+</div>
