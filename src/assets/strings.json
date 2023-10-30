@@ -5,6 +5,16 @@
     "GithubURL": "https://github.com/jrichard5",
     "AboutMe": "Hi there! As a recent graduate with a passion for back-end development, I'm excited to pursue a career in software engineering.  During my internship, I was tasked with developing and maintaining the back-end of a complex web application, and I loved every minute of it which solidified my passion for programming.   While I appreciate the importance of front-end development, my true passion lies in the back-end, where I can apply my technical expertise to create efficient, scalable, and reliable systems.  I'm always eager to learn and take on new challenges, and I work well both independently and as part of a team.  I'm excited to bring my skills and enthusiasm to a new opportunity in software development, and I look forward to discussing how I can contribute to your team.",
     "something": "something",
+    "AppleStocks": {
+        "name": "AAPL",
+        "price": 166.89,
+        "quantity": 25
+    },
+    "VixStocks" :{
+        "name": "VIX",
+        "price": 20.68,
+        "quantity": 100
+    },
     "projects":[
         {
             "projectTitle": "Notecard App",
@@ -79,30 +89,48 @@
                     "description": "This API was made with .NET's web api. It automatically has swagger to help document endpoints for developers to get, post, update, or delete data."
                 },
                 {
-                    "picture": "assets/pictures/projects/PetApi/APITemplate02.png",
+                    "picture": "assets/pictures/projects/PetApi/APiTemplate02.png",
                     "description": "Shows the GET all endpoint."
                 },
                 {
-                    "picture": "assets/pictures/projects/PetApi/APITemplate03.png",
+                    "picture": "assets/pictures/projects/PetApi/APiTemplate03.png",
                     "description": "Shows the POST endpoint"
                 },
                 {
-                    "picture": "assets/pictures/projects/PetApi/APITemplate04.png",
+                    "picture": "assets/pictures/projects/PetApi/APiTemplate04.png",
                     "description": "Shows GET all endpoint again to show that the POST endpoint worked."
                 },
                 {
-                    "picture": "assets/pictures/projects/PetApi/APITemplate05.png",
+                    "picture": "assets/pictures/projects/PetApi/APiTemplate05.png",
                     "description": "Shows GET endpoint that gives a file."
                 },
                 {
-                    "picture": "assets/pictures/projects/PetApi/APITemplate06.png",
+                    "picture": "assets/pictures/projects/PetApi/APiTemplate06.png",
                     "description": "Shows the CSV file that was downloaded.  Note 6 and 7 were there to test XSS.  I know the get all endpoint was encoded, but I think I missed the CSV file."
                 }
             ]
         },
         {
-            "projectTitle": "Pet Api",
-            "slideshow":[]
+            "projectTitle": "Old Website",
+            "slideshow":[
+                {
+                    "picture": "assets/pictures/projects/FirstWebSite/oldwebsite1.jpg",
+                    "description": "Shows start page"
+                },
+                {
+                    "picture": "assets/pictures/projects/FirstWebSite/oldwebsite2.jpg",
+                    "description": "Shows code for side nav navigation"
+                },
+                {
+                    "picture": "assets/pictures/projects/FirstWebSite/oldwebsite3.jpg",
+                    "description": "Shows code for slide show"
+                },
+                {
+                    "picture": "assets/pictures/projects/FirstWebSite/oldwebsite3p2.jpg",
+                    "description": "Shows code for slide show (part 2)"
+                }
+
+            ]
         }
     ]
 }

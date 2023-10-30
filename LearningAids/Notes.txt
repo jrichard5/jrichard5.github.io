@@ -2,3 +2,16 @@
 
 ng generate config karma
 dont even need config file,  ng test --no-watch --no-progress     in github action.... but doesn't work, so need to do a script
+
+
+
+https://stackoverflow.com/questions/56204346/typescript-error-an-outer-value-of-this-is-shadowed-by-this-container
+In TypeScript (and ES6) exists two kinds of functions: The classic function declaration and the arrow function. Where the classic function declaration has the default floating binding logic for the this keyword - the arrow function will constantly use the value for this of the context containing the arrow function. In the example this will be the instance of the surrounding class.
+
+https://stackoverflow.com/questions/55472124/subscribe-is-deprecated-use-an-observer-instead-of-an-error-callback
+.subscribe({
+    complete: () => { ... }, // completeHandler
+    error: () => { ... },    // errorHandler 
+    next: () => { ... },     // nextHandler
+    someOtherProperty: 42
+});

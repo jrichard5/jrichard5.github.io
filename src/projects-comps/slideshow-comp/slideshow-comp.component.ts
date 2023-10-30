@@ -18,15 +18,7 @@ export class SlideshowCompComponent implements OnInit, OnDestroy {
   currentProject : project | undefined;
   currentSlide : slideShowCard | undefined;
   currentDescriptionArray : string[] = []
-
-
-  descIntoArray(desc : string) : string[] {
-    let newString = desc.trimEnd();
-    if(newString.endsWith(".")){
-      newString = newString.slice(0,-1);
-    }
-    return newString.split(".");
-  }
+  currentIndex : number = 0;
 
 
   constructor(private json: ReadJsonServiceService){
@@ -49,4 +41,67 @@ export class SlideshowCompComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  //#region event handlers
+
+  titleSelectedHandler(title : string){
+    this.currentProject = this.projects.find((project) => project.projectTitle == title);
+    this.currentIndex = 0;
+    this.assignNewSlideValues();
+
+  }
+  leftButtonHandler(){
+    if(this.currentProject){
+      if (this.currentIndex > 0){
+        this.currentIndex--;
+        this.assignNewSlideValues();
+      }
+      else{
+        this.currentIndex = this.currentProject.slideshow.length - 1;
+        this.assignNewSlideValues();
+      }
+    }
+  }
+
+  rightButtonHandler(){
+    if(this.currentProject){
+      // 16 = length.  so 15 = max index.  15-1 then plus +1 = 15
+      if (this.currentIndex + 1 < this.currentProject.slideshow.length){
+        this.currentIndex++;
+        this.assignNewSlideValues();
+      }
+      else{
+        this.currentIndex = 0;
+        this.assignNewSlideValues();
+      }
+    }
+  }
+
+  
+  //#endregion
+
+  //#region private/helper functions
+  //private / helper functions
+  private descIntoArray(desc : string) : string[] {
+    let newString = desc.trimEnd();
+    if(newString.endsWith(".")){
+      newString = newString.slice(0,-1);
+    }
+    return newString.split(".");
+  }
+
+  private assignNewSlideValues(){
+    if(this.currentProject){
+      this.currentSlide = this.currentProject.slideshow[this.currentIndex];
+      this.currentDescriptionArray = this.descIntoArray(this.currentSlide.description);
+    }
+  }
+
+  enlargeImg(){
+    let img = document.getElementById("pic");
+    img?.classList.toggle("enlarge");
+    let Ux = document.getElementById("UXTextHelp");
+    Ux?.classList.toggle("hide");
+  }
+  //#endregion
 }

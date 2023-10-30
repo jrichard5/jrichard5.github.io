@@ -2,19 +2,27 @@
 </mat-spinner>
 
 <div *ngIf="jsonSubscription$ && jsonSubscription$.closed && isFiveSecLoad">
-    <app-project-nav-comp [projectNames]="projectTitles"></app-project-nav-comp>
+    <app-project-nav-comp [projectNames]="projectTitles" (titleSelected)="titleSelectedHandler($event)"></app-project-nav-comp>
     <h2>{{currentProject?.projectTitle}}</h2>
+
     <div id="slideShowContainer">
-        <button>left</button>
-        <div id="pictureForSlideShow">
-            <img [src]="currentSlide?.picture">
+        <button (click)="leftButtonHandler()">left</button>
+        <div id="pictureForSlideShowContainer">
+            <div id="pictureForSlideShow">
+                <img id="pic" [src]="currentSlide?.picture" (click)="enlargeImg()">
+            </div>
         </div>
+        
         
         <div id="descriptionForSlideShow">
             <ul>
                 <li *ngFor="let list of currentDescriptionArray"> {{list}}</li>
             </ul>
         </div>  
-        <button>right</button>
+        <button (click)="rightButtonHandler()">right</button>
     </div>
+</div>
+
+<div id="UXTextHelp" class="hide">
+    Left click picture to un-enlarge
 </div>

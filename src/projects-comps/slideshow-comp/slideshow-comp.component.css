@@ -11,18 +11,28 @@ h2{
     text-align: center;
 }
 
-#pictureForSlideShow{
-    width: 65%;
-    padding: 7% 0%;
+#pictureForSlideShowContainer{
+    max-width: 65%;
+    min-width: 65%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
     background-color: black;
+    padding: 3% 0%;
+}
+
+#pictureForSlideShow{
+    margin-left: auto;
+    margin-right: auto;
 }
 img{
-    width: 100%;
-    height: 100%;
+    height: auto;
+    width:100%;
+    
 }
 #descriptionForSlideShow{
     width: 35%;
-    padding: 16px;
+    padding: 4px;
     display: flex;
     justify-items: center;
     align-items: center;
@@ -36,4 +46,29 @@ button{
 }
 button:hover{
     background-color: black;
+}
+.enlarge{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    transform: scale(0.9);
+    transition: transform 1s ease;
+
+    margin: auto;
+    right: 0;
+}
+
+#UXTextHelp{
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: red;
+    font-size: 32px;
+}
+.hide{
+    display: none;
 }
