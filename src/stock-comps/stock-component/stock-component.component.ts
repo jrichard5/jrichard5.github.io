@@ -4,6 +4,7 @@ import { ReadJsonServiceService } from 'src/common-comps/Services/read-json-serv
 import { stockCardInfo } from './stockInterfaces/stockCardInterface';
 import { HttpClient } from '@angular/common/http';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-stock-component',
@@ -48,7 +49,17 @@ export class StockComponentComponent implements OnInit, OnDestroy {
     }
     );
 
-    
+
+    // var aDate = new Date();
+    // var bDate = new Date(aDate.getFullYear(), 0-1)
+    var bDate = new Date(1693540800 * 1000 );//1698804590929
+    var dDate = new Date();
+    var eDate = new Date(dDate.getFullYear(), dDate.getMonth()-1, 31);
+    console.log(eDate);
+
+    //console.log(formatDate(Date.now(), 'yyyy-MM-dd', 'en-US'))
+
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#date-time_component_options
     
     // this.marketDataSub$ = this.http.get<any>('https://api.marketdata.app/v1/stocks/quotes/AAPL/').subscribe(data => {
     //   this.aaplInfoCurrent.price = data.mid;
