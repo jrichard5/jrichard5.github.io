@@ -15,3 +15,7 @@ https://stackoverflow.com/questions/55472124/subscribe-is-deprecated-use-an-obse
     next: () => { ... },     // nextHandler
     someOtherProperty: 42
 });
+
+
+canvasjs stockchart hates flex.
+

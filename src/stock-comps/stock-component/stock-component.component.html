@@ -1,13 +1,14 @@
 <h2>Simulated Stock Tracker Trading $6,240.25</h2>
 <div id="bigContainer">
-    
-     <div id="pastPriceDiv" class="PriceDiv" *ngIf="jsonSubscription$.closed && showCards">
-        <h2>Past</h2>
-        <app-stock-info-card [stockCardInfo]="aaplInfoPast" [pastTotal]="aaplPastTotal"></app-stock-info-card>
-        <app-stock-info-card [stockCardInfo]="vixInfoPast" [pastTotal]="vixPastTotal"></app-stock-info-card>
-    </div>
-    <div *ngIf="!showCards" id="graph">
-        <app-stock-graph></app-stock-graph>
+    <div id="section1">
+        <div id="pastPriceDiv" class="PriceDiv" *ngIf="jsonSubscription$.closed && showCards">
+            <h2>Past</h2>
+            <app-stock-info-card [stockCardInfo]="aaplInfoPast" [pastTotal]="aaplPastTotal"></app-stock-info-card>
+            <app-stock-info-card [stockCardInfo]="vixInfoPast" [pastTotal]="vixPastTotal"></app-stock-info-card>
+        </div>
+        <div id="graph" *ngIf="!showCards">
+            <app-stock-graph></app-stock-graph>
+        </div>
     </div>
     <hr>
     
@@ -19,5 +20,7 @@
     </div>
 
 </div>
+
+
 
 <p>**Using Market Data's API which gives AAPL and VIX do not need an api key.**</p>

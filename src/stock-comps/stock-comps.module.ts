@@ -6,6 +6,7 @@ import { StockComponentComponent } from './stock-component/stock-component.compo
 import { StockInfoCardComponent } from './stock-component/stock-info-card/stock-info-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StockGraphComponent } from './stock-component/stock-graph/stock-graph.component';
+import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { StockGraphComponent } from './stock-component/stock-graph/stock-graph.c
   imports: [
     CommonModule,
     StockCompsRoutingModule,
+    CanvasJSAngularStockChartsModule,
     HttpClientModule
   ]
 })
