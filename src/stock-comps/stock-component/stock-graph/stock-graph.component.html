@@ -1,4 +1,7 @@
-<div id="graph12" *ngIf="is3SecondLoad">
+<mat-spinner *ngIf="!is3SecondLoad || !stockDataSub$.closed">
+</mat-spinner>
+
+<div id="graph12" *ngIf="is3SecondLoad && stockDataSub$.closed">
     <canvasjs-chart [options]="stockChart" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
 </div>
 

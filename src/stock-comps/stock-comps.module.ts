@@ -7,6 +7,7 @@ import { StockInfoCardComponent } from './stock-component/stock-info-card/stock-
 import { HttpClientModule } from '@angular/common/http';
 import { StockGraphComponent } from './stock-component/stock-graph/stock-graph.component';
 import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts'
     CommonModule,
     StockCompsRoutingModule,
     CanvasJSAngularStockChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ]
 })
 export class StockCompsModule { }

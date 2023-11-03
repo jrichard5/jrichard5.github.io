@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, Input, LOCALE_ID, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, shareReplay } from 'rxjs';
 import { stockDataPoints } from './stockGraphInterfaces/stockDataInterface';
 import { formatDate } from '@angular/common';
+import { stockSubscriptionItem } from './stockGraphInterfaces/stockSubscriptionItem';
 
 @Component({
   selector: 'app-stock-graph',
@@ -12,6 +13,7 @@ import { formatDate } from '@angular/common';
 export class StockGraphComponent implements OnInit, OnChanges, OnDestroy{
 
   stockData : stockDataPoints[] = []
+  stockDataSubscriptionArray : stockSubscriptionItem[] = [];
   stockDataSub$ !: Subscription;
   chart: any;
   is3SecondLoad : boolean = false;
@@ -76,6 +78,7 @@ export class StockGraphComponent implements OnInit, OnChanges, OnDestroy{
     let startMonth = new Date(year, month-12, theDay);
     let startString = formatDate(startMonth, 'yyyy-MM-dd', 'en-US')
     let endString = formatDate(endMonth, 'yyyy-MM-dd', 'en-US')
+
     let urlForMarketDataAPI = `https://api.marketdata.app/v1/stocks/candles/M/${this.codeForGraph}?from=${startString}&to=${endString}`
 
     // while(counter > 0){
@@ -86,7 +89,20 @@ export class StockGraphComponent implements OnInit, OnChanges, OnDestroy{
       urlForMarketDataAPI = `https://api.marketdata.app/v1/indices/candles/M/VIX?from=${startString}&to=${endString}`
     }
 
-    this.stockDataSub$ = this.http.get<any>(urlForMarketDataAPI)
+    if (!this.stockDataSubscriptionArray.some( item => item.urlString == urlForMarketDataAPI )){
+      this.stockDataSubscriptionArray.push(
+        {
+          urlString: urlForMarketDataAPI, 
+          sub: this.http.get<any>(urlForMarketDataAPI).pipe(shareReplay(10))
+        })
+    }
+    else{
+      
+    }
+
+    var foundSub = this.stockDataSubscriptionArray.find(item => item.urlString == urlForMarketDataAPI)?.sub ?? this.http.get<any>(urlForMarketDataAPI)
+
+    this.stockDataSub$ =  foundSub
     .subscribe({
       next: (data)=>{
         for(let i = 0; i < data.c.length; i++){
