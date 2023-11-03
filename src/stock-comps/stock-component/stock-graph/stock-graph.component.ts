@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, LOCALE_ID, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { stockDataPoints } from './stockGraphInterfaces/stockDataInterface';
 import { formatDate } from '@angular/common';
@@ -9,17 +9,20 @@ import { formatDate } from '@angular/common';
   templateUrl: './stock-graph.component.html',
   styleUrls: ['./stock-graph.component.css']
 })
-export class StockGraphComponent implements OnInit, OnDestroy{
+export class StockGraphComponent implements OnInit, OnChanges, OnDestroy{
 
   stockData : stockDataPoints[] = []
   stockDataSub$ !: Subscription;
   chart: any;
   is3SecondLoad : boolean = false;
 
+  @Input()
+  codeForGraph : string = "";
+
 
   stockChart = {
     title:{
-      text: "something"
+      text: ""
     },
     theme: "dark1",
     axisX:{
@@ -31,6 +34,122 @@ export class StockGraphComponent implements OnInit, OnDestroy{
       dataPoints: this.stockData
     }]
   }
+
+
+
+  constructor(private http: HttpClient){
+
+  }
+
+  initComplete(){
+    //console.log(this.stockData);
+
+    // const myPromise : Promise<void> = new Promise( resolve => {
+    //   setTimeout(() => {
+    //     this.is3SecondLoad = true;
+    //     console.log("inside my prmoise")
+    //     resolve();
+    //   }, 2500)
+    // })
+    // myPromise;
+
+    setTimeout(() => {
+      this.is3SecondLoad = true;
+      console.log("inside my prmoise")
+    }, 2500)
+  }
+
+  updateComplte(){
+    this.updateChart();
+  }
+
+  getAPIString(completeFunction : () => void){
+    
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth();
+    let theDay = new Date().getDate();
+    if(theDay >= 28){
+      theDay = 28;
+    }
+    let counter = 12;
+    let endMonth = new Date(year, month, theDay);
+    let startMonth = new Date(year, month-12, theDay);
+    let startString = formatDate(startMonth, 'yyyy-MM-dd', 'en-US')
+    let endString = formatDate(endMonth, 'yyyy-MM-dd', 'en-US')
+    let urlForMarketDataAPI = `https://api.marketdata.app/v1/stocks/candles/M/${this.codeForGraph}?from=${startString}&to=${endString}`
+
+    // while(counter > 0){
+    //   this.stockData.push({x: new Date(year, month-counter), y: counter})
+    //   counter = counter-1;
+    // };
+    if(this.codeForGraph == "VIX"){
+      urlForMarketDataAPI = `https://api.marketdata.app/v1/indices/candles/M/VIX?from=${startString}&to=${endString}`
+    }
+
+    this.stockDataSub$ = this.http.get<any>(urlForMarketDataAPI)
+    .subscribe({
+      next: (data)=>{
+        for(let i = 0; i < data.c.length; i++){
+          let something = new Date(data.t[i] * 1000)
+          console.log(`Price: ${data.c[i]} at ${something.toString()}`)
+        }
+        
+        if(Array.isArray(data.c)){
+          data.c.forEach((item : number) => {
+            this.stockData.push({x: new Date(year, month-counter), y: item})
+            counter = counter-1;
+          })
+        }
+
+        this.stockChart.data[0].dataPoints = this.stockData
+        this.stockChart.title = {text: this.codeForGraph};
+      },
+      error(){
+        alert("the api didn't get data :(, im noob programmer");
+      },
+      complete: () => {
+        completeFunction.bind(this)();
+      }
+  })
+    
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes["codeForGraph"].firstChange){
+      return;
+    }
+    if (changes['codeForGraph'].previousValue != changes['codeForGraph'].currentValue){
+      this.stockData =  []
+      this.getAPIString(this.updateChart)
+
+      console.log(`on changes changed to ${this.codeForGraph}`);
+      
+    }
+    
+  }
+  
+
+  ngOnInit(): void {
+    this.getAPIString(this.initComplete)
+  }
+
+  ngOnDestroy(): void {
+    if (this.stockDataSub$){
+      this.stockDataSub$.unsubscribe();
+    }
+  }
+
+  getChartInstance(chart: object){
+    this.chart = chart;
+  }
+  updateChart(){
+    this.chart.render();
+    console.log("inside then")
+  }
+
+}
+
 
   // stockChart = {
   //   title:{
@@ -49,69 +168,3 @@ export class StockGraphComponent implements OnInit, OnDestroy{
   // }]
     
   // }
-
-  constructor(private http: HttpClient){
-
-  }
-  
-
-  ngOnInit(): void {
-    let year = new Date().getFullYear();
-    let month = new Date().getMonth();
-    let theDay = new Date().getDate();
-    if(theDay >= 28){
-      theDay = 28;
-    }
-    let counter = 12;
-    let endMonth = new Date(year, month, theDay);
-    let startMonth = new Date(year, month-12, theDay);
-    console.log(startMonth + "  " +endMonth);
-    let startString = formatDate(startMonth, 'yyyy-MM-dd', 'en-US')
-    let endString = formatDate(endMonth, 'yyyy-MM-dd', 'en-US')
-    
-
-    
-    
-    while(counter > 0){
-      this.stockData.push({x: new Date(year, month-counter), y: counter})
-      counter = counter-1;
-    };
-
-    setTimeout(() => {this.is3SecondLoad = true;}, 3000);
-    
-
-    // this.stockDataSub$ = this.http.get<any>(`https://api.marketdata.app/v1/stocks/candles/M/AAPL?from=${startString}&to=${endString}`)
-    // .subscribe({
-    //   next: (data)=>{
-    //     console.log(data);
-    //     if(Array.isArray(data.c)){
-    //       data.c.forEach((item : number) => {
-    //         this.stockData.push({x: new Date(year, month-counter), y: item})
-    //         counter = counter-1;
-    //       })
-    //     }
-    //   },
-    //   error(){
-    //     alert("the api didn't get data :(, im noob programmer");
-    //   },
-    //   complete: ()  => {
-    //     console.log(this.stockData);
-        
-    //   }
-    // })
-  }
-
-  ngOnDestroy(): void {
-    if (this.stockDataSub$){
-      this.stockDataSub$.unsubscribe();
-    }
-  }
-
-  getChartInstance(chart: object){
-    this.chart = chart;
-  }
-  updateChart(){
-    this.chart.render();
-  }
-
-}

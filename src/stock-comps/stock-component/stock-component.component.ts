@@ -27,6 +27,7 @@ export class StockComponentComponent implements OnInit, OnDestroy {
   marketDataSub2$ !: Subscription
 
   showCards : boolean = true;
+  currentCard : string = "";
 
   constructor(private json: ReadJsonServiceService, private http : HttpClient){
 
@@ -49,20 +50,15 @@ export class StockComponentComponent implements OnInit, OnDestroy {
     }
     );
 
+    this.marketDataSub$ = this.http.get<any>('https://api.marketdata.app/v1/stocks/quotes/AAPL/').subscribe(data => {
+      this.aaplInfoCurrent.price = data.mid;
+      console.log(data);
+    })
 
-
-
-    
-    
-    // this.marketDataSub$ = this.http.get<any>('https://api.marketdata.app/v1/stocks/quotes/AAPL/').subscribe(data => {
-    //   this.aaplInfoCurrent.price = data.mid;
-    //   console.log(data);
-    // })
-
-    // this.marketDataSub2$ = this.http.get<any>('https://api.marketdata.app/v1/stocks/quotes/VIX/').subscribe(data => {
-    //   this.vixInfoCurrent.price = data.mid;
-    //   console.log(data);
-    // })
+    this.marketDataSub2$ = this.http.get<any>('https://api.marketdata.app/v1/indices/quotes/VIX/').subscribe(data => {
+      this.vixInfoCurrent.price = data.last;
+      console.log(data);
+    })
 
 
     // this.jsonSubscription$ = this.json.getAssetJsonFunction().subscribe({
@@ -93,6 +89,10 @@ export class StockComponentComponent implements OnInit, OnDestroy {
     }
   }
 
+  codeSelectedHandler(code : string){
+    this.currentCard = code;
+    this.currentPriceClickHandler();
+  }
 
   currentPriceClickHandler(){
     let currentPriceDiv = document.getElementById("currentPriceDiv");

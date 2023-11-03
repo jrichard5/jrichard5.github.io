@@ -1,4 +1,4 @@
-<div class="stockCard">
+<div class="stockCard" (click)="emitStockCode(stockCardInfo.name)">
     <div>
         {{stockCardInfo.name}}
     </div>
@@ -10,6 +10,6 @@
     </div>
     <hr>
     <div>
-        {{currentTotal}} ({{deltaTotal}})
+        {{currentTotal}} <span [ngStyle]="{'color': (deltaTotal >= 0) ? '#ffffff' : '#ff0000'}">({{deltaTotal}})</span>
     </div>
 </div>

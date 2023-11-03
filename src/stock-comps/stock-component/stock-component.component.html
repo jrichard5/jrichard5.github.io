@@ -7,15 +7,15 @@
             <app-stock-info-card [stockCardInfo]="vixInfoPast" [pastTotal]="vixPastTotal"></app-stock-info-card>
         </div>
         <div id="graph" *ngIf="!showCards">
-            <app-stock-graph></app-stock-graph>
+            <app-stock-graph [codeForGraph]="currentCard"></app-stock-graph>
         </div>
     </div>
     <hr>
     
     <div id="currentPriceDiv" class="PriceDiv">
         <h2>Current</h2>
-        <app-stock-info-card *ngIf="jsonSubscription$.closed" [stockCardInfo]="aaplInfoCurrent" [pastTotal]="aaplPastTotal" (click)="currentPriceClickHandler()" class="autoMargin" ></app-stock-info-card>
-        <app-stock-info-card [stockCardInfo]="vixInfoCurrent" [pastTotal]="vixPastTotal" (click)="currentPriceClickHandler()" class="autoMargin"></app-stock-info-card>
+        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub$.closed" [stockCardInfo]="aaplInfoCurrent" [pastTotal]="aaplPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin" ></app-stock-info-card>
+        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub2$.closed" [stockCardInfo]="vixInfoCurrent" [pastTotal]="vixPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin"></app-stock-info-card>
         <button (click)="reverseStyleChilkHandler()">Total Cards</button>
     </div>
 

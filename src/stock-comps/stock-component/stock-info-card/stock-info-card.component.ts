@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { stockCardInfo } from '../stockInterfaces/stockCardInterface';
 
 @Component({
@@ -13,6 +13,9 @@ export class StockInfoCardComponent implements OnInit {
   @Input()
   pastTotal : number = 0;
 
+  @Output()
+  codeSelected = new EventEmitter<string>();
+
   currentTotal : number = 0;
   deltaTotal : number = 0;
 
@@ -22,5 +25,10 @@ export class StockInfoCardComponent implements OnInit {
   ngOnInit(): void {
     this.currentTotal = this.stockCardInfo.price * this.stockCardInfo.quantity;
     this.deltaTotal = this.currentTotal - this.pastTotal;
+  }
+
+
+  emitStockCode(code : string){
+    this.codeSelected.emit(code);
   }
 }

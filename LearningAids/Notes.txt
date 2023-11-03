@@ -19,3 +19,18 @@ https://stackoverflow.com/questions/55472124/subscribe-is-deprecated-use-an-obse
 
 canvasjs stockchart hates flex.
 
+
+using this in a callback function.  
+https://stackoverflow.com/questions/20279484/how-to-access-the-correct-this-inside-a-callback
+
+var boundFunction = (function() { // parenthesis are not necessary
+        alert(this.data);             // but might improve readability
+    }).bind(this);
+
+
+
+
+
+NEXT TODO:
+ADD SPINNER to stocks
+add sharereplay to stocks
