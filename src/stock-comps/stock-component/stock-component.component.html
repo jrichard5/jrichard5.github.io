@@ -14,8 +14,8 @@
     
     <div id="currentPriceDiv" class="PriceDiv">
         <h2>Current</h2>
-        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub$.closed" [stockCardInfo]="aaplInfoCurrent" [pastTotal]="aaplPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin" ></app-stock-info-card>
-        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub2$.closed" [stockCardInfo]="vixInfoCurrent" [pastTotal]="vixPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin"></app-stock-info-card>
+        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub$.closed" [stockCardInfo]="aaplInfoCurrent" [pastTotal]="aaplPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin clickableStockCard" ></app-stock-info-card>
+        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub2$.closed" [stockCardInfo]="vixInfoCurrent" [pastTotal]="vixPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin clickableStockCard"></app-stock-info-card>
         <button (click)="reverseStyleChilkHandler()">Total Cards</button>
     </div>
 

@@ -41,6 +41,12 @@ app-stock-info-card{
     width: 75%;
     margin: 10% 0%;
     transition:  margin 2s;
+    
+}
+
+.clickableStockCard:hover{
+    transform: scale(1.1);
+    transition:  transform 1s;
 }
 
 button{
