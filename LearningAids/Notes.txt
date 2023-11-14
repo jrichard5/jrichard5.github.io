@@ -31,6 +31,11 @@ var boundFunction = (function() { // parenthesis are not necessary
 
 
 
+For the game:
+https://stackoverflow.com/questions/1137517/how-to-position-absolute-inside-a-div
+use relative to make absolution position in relation to parent
+
+
 NEXT TODO:
 ADD SPINNER to stocks
 add sharereplay to stocks

@@ -9,6 +9,7 @@
     width: 500px;
     background: gray;
     border: solid white 2px;
+    position: relative;
 }
 
 .collidable{

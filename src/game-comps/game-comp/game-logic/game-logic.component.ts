@@ -41,23 +41,20 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     let middleForCircle = (this.containerWidth / 2) - (this.width / 2);
 
 
-    console.log(container.getBoundingClientRect().top)
-
     const newMoveableDiv = this.render.createElement('div');
-    newMoveableDiv.setAttribute('style', `left:${middleForCircle + container.getBoundingClientRect().left}px; top: ${container.getBoundingClientRect().top + 10}px; width: ${this.width}px; height: ${this.width}px`)
+    newMoveableDiv.setAttribute('style', `left:${middleForCircle}px; top: 0px; width: ${this.width}px; height: ${this.width}px`)
     newMoveableDiv.classList.add('collidable');
     this.render.appendChild(container, newMoveableDiv)
     this.movingDiv = new movableDiv(newMoveableDiv);
     
 
-    const staticDiv = this.render.createElement('div');
-    staticDiv.setAttribute('style', `left:${middleForCircle + container.getBoundingClientRect().left}px; top: ${container.getBoundingClientRect().top + 100}px; width: ${this.width}px; height: ${this.width}px`)
-    staticDiv.classList.add('collidable')
-    
-    this.render.appendChild(container, staticDiv);
-    this.staticDivs?.push(new baseDiv(staticDiv));
+    // const staticDiv = this.render.createElement('div');
+    // staticDiv.setAttribute('style', `left:${middleForCircle}px; top: ${100}px; width: ${this.width}px; height: ${this.width}px`)
+    // staticDiv.classList.add('collidable')
+    // this.render.appendChild(container, staticDiv);
+    // this.staticDivs?.push(new baseDiv(staticDiv));
 
-
+    this.setupStaticCricles();
 
 
     this.interval = setInterval(() => this.redrawMovingDiv(), 100);
@@ -70,8 +67,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     if (this.staticDivs && this.movingDiv){
       this.staticDivs.forEach(staticDiv => {
       if (this.movingDiv){
-        if (this.movingDiv.top > container.getBoundingClientRect().bottom - this.width){
-          this.movingDiv.top = container.getBoundingClientRect().top + 10;
+        if (this.movingDiv.top > 500 - this.width){
+          this.movingDiv.top =  10;
         }
         const dx = staticDiv.left - this.movingDiv.left
         const dy = staticDiv.top - this.movingDiv.top
@@ -100,14 +97,14 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   redrawMovingDiv() : void {
     if(this.movingDiv){
       this.movingDiv.onTick();
-      this.movingDiv.ref.setAttribute('style', `height:${this.width}px; width:${this.width}px; left:${this.movingDiv.left - (this.width / 2)}px; top: ${this.movingDiv.top - (this.width /2)}px; background-color: red;`);
+      this.movingDiv.ref.setAttribute('style', `height:${this.width}px; width:${this.width}px; left:${this.movingDiv.left}px; top: ${this.movingDiv.top}px; background-color: red;`);
       this.collideFunction();
     }
   }
 
   setupStaticCricles() : void {
     const howManyRows = 5;
-    for(let i = 0; i<5; i++){
+    for(let i = 0; i<howManyRows; i++){
       if(i % 2 == 0){
         this.setupEvenStaticCircles(i);
       }
@@ -118,13 +115,13 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   setupOddStaticCircles(rowNumber : number) : void {
-    let numberOfCirclesNeeded = (rowNumber * 2) + 1;
+    let numberOfCirclesNeeded = (rowNumber) + 2;
     const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer');
-    let middleForCircle = (this.containerWidth / 2) + container.getBoundingClientRect().left;
-    let spaceInBetween = this.width * 2.5;
+    let middleForCircle = (this.containerWidth / 2);
+    let spaceInBetween = this.width * 3;
     let leftPixelCount = middleForCircle - spaceInBetween;
     let rightPixelCount = middleForCircle + spaceInBetween;
-    let thisRowHeight = 100 + (this.width * 2) + (rowNumber * (this.width * 2));
+    let thisRowHeight = 100 + (rowNumber * (this.width * 3));
 
     for(let i = 0; i<numberOfCirclesNeeded; i++){
       if(i == 0){
@@ -155,15 +152,15 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   setupEvenStaticCircles(rowNumber : number) : void {
-    let numberOfCirclesNeeded = (rowNumber * 2) + 2;
+    let numberOfCirclesNeeded = (rowNumber) + 2;
     
     const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer');
-    let middleForCircle = (this.containerWidth / 2) + container.getBoundingClientRect().left;
-    let spaceInBetween = this.width * 2.5;
+    let middleForCircle = (this.containerWidth / 2);
+    let spaceInBetween = this.width * 3;
     let leftPixelCount = middleForCircle - (spaceInBetween / 2);
     let rightPixelCount = middleForCircle + (spaceInBetween / 2);
     //4 because only even rows (so x2 to skip a row)
-    let thisRowHeight = 100 + (rowNumber * (this.width * 4) ) + container.getBoundingClientRect().top
+    let thisRowHeight = 100 + (rowNumber * (this.width * 3) )
 
     for(let i = 0; i<numberOfCirclesNeeded; i++){
       if(i % 2 == 0){
@@ -195,10 +192,10 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
       returnArray[0] = randomValue;
     }
     else if(dx < 0){
-      returnArray[0] = this.getRandomArbitrary(0, 3) * 7
+      returnArray[0] = this.getRandomArbitrary(1, 3) * 4
     }
     else if (dx > 0){
-      returnArray[0] = this.getRandomArbitrary(-3, 0) * 7;
+      returnArray[0] = this.getRandomArbitrary(-3, 1) * 4;
     }
 
     if(dy > (this.width) - (this.width / 10)){
@@ -235,9 +232,12 @@ class baseDiv {
  constructor(ref : HTMLElement){
   
   this.radius = ref.getBoundingClientRect().height / 2;
-  this.left = ref.getBoundingClientRect().left + (this.radius);
+  let leftString : number = parseFloat(parseFloat(window.getComputedStyle(ref).getPropertyValue("left").replace(/px/g, '')).toFixed(2));
+  this.left = leftString
   console.log(this.left);
-  this.top = ref.getBoundingClientRect().top + (this.radius);
+  let topString : number = parseFloat(parseFloat(window.getComputedStyle(ref).getPropertyValue("top").replace(/px/g, '')).toFixed(2));
+  this.top = topString
+  console.log(window.getComputedStyle(ref).getPropertyValue("top").replace(/px/g, ''));
 
  }
 }
