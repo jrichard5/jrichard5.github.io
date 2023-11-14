@@ -1,0 +1,19 @@
+
+
+.collision-state {
+    background-color: green;
+  }
+
+.gameContainer{
+    height: 500px;
+    width: 500px;
+    background: gray;
+    border: solid white 2px;
+}
+
+.collidable{
+  border-radius: 50%;
+  display: inline-block;
+  background-color: blue;
+  position: absolute;
+}
