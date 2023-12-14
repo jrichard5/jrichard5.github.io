@@ -119,8 +119,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer');
     let middleForCircle = (this.containerWidth / 2);
     let spaceInBetween = this.width * 3;
-    let leftPixelCount = middleForCircle - spaceInBetween;
-    let rightPixelCount = middleForCircle + spaceInBetween;
+    let leftPixelCount = middleForCircle - spaceInBetween - (this.width / 2);
+    let rightPixelCount = middleForCircle + spaceInBetween - (this.width / 2);
     let thisRowHeight = 100 + (rowNumber * (this.width * 3));
 
     for(let i = 0; i<numberOfCirclesNeeded; i++){
@@ -157,8 +157,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer');
     let middleForCircle = (this.containerWidth / 2);
     let spaceInBetween = this.width * 3;
-    let leftPixelCount = middleForCircle - (spaceInBetween / 2);
-    let rightPixelCount = middleForCircle + (spaceInBetween / 2);
+    let leftPixelCount = middleForCircle - (spaceInBetween / 2) - (this.width / 2);
+    let rightPixelCount = middleForCircle + (spaceInBetween / 2)- (this.width / 2);
     //4 because only even rows (so x2 to skip a row)
     let thisRowHeight = 100 + (rowNumber * (this.width * 3) )
 
@@ -258,10 +258,23 @@ class baseDiv {
         this.downVelocity = this.downVelocity + 1
       }
       if (this.horiVelocity > 0){
-        this.horiVelocity = this.horiVelocity - 1;
+        if (this.horiVelocity < 1){
+          this.horiVelocity = 0;
+        }
+        else{
+          this.horiVelocity = this.horiVelocity - 1;
+        }
+        
       }
+      //if going left, need to make it go right a little bit
       if (this.horiVelocity < 0){
-        this.horiVelocity = this.horiVelocity + 1;
+        if (this.horiVelocity > -1){
+          this.horiVelocity = 0
+        }
+        else{
+          this.horiVelocity = this.horiVelocity + 1;
+        }
+        
       }
 
       this.top = this.top + this.downVelocity;
