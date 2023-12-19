@@ -103,7 +103,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   setupStaticCricles() : void {
-    const howManyRows = 5;
+    const howManyRows = 6;
     for(let i = 0; i<howManyRows; i++){
       if(i % 2 == 0){
         this.setupEvenStaticCircles(i);
@@ -112,6 +112,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
         this.setupOddStaticCircles(i);
       }
     }
+    this.setupScoreSquares(howManyRows);
   }
 
   setupOddStaticCircles(rowNumber : number) : void {
@@ -178,6 +179,41 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
         staticDiv.classList.add('collidable')
         this.render.appendChild(container, staticDiv);
         this.staticDivs?.push(new baseDiv(staticDiv));
+      }
+    }
+  }
+
+  setupScoreSquares(rowNumber : number) : void {
+    //not rowNumber + 1 because other functions start at rowNumber = 0;
+    let rowHeight = 100 + ((rowNumber) * (this.width * 3)) - (this.width)
+    const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer');
+    let middleForCircle = (this.containerWidth / 2);
+    let spaceInBetween = this.width * 3;
+    
+    if(rowNumber % 2 != 0){
+      let middleLeftPixel = middleForCircle - (spaceInBetween / 2);
+      let leftPixel =  middleLeftPixel - (((rowNumber - 1)/2) * spaceInBetween)
+      for(let i = 0; i< (rowNumber); i++){
+        const staticDiv = this.render.createElement('div');
+        staticDiv.innerHTML = (i+1).toString();
+        staticDiv.setAttribute('style', `left:${leftPixel}px; top: ${rowHeight}px; width: ${spaceInBetween}px; height: ${spaceInBetween}px`)
+        leftPixel = leftPixel + spaceInBetween;
+        staticDiv.classList.add('scoreSquare')
+        this.render.appendChild(container, staticDiv);
+        //this.staticDivs?.push(new baseDiv(staticDiv));
+      }
+    }
+    else{
+      let middle = middleForCircle;
+      let leftPixel = middle - (((rowNumber)/2) * spaceInBetween);
+      for(let i = 0; i < (rowNumber); i++){
+        const staticDiv = this.render.createElement('div');
+        staticDiv.innerHTML = (i+1).toString();
+        staticDiv.setAttribute('style', `left:${leftPixel}px; top: ${rowHeight}px; width: ${spaceInBetween}px; height: ${spaceInBetween}px`)
+        leftPixel = leftPixel + spaceInBetween;
+        staticDiv.classList.add('scoreSquare')
+        this.render.appendChild(container, staticDiv);
+        
       }
     }
   }

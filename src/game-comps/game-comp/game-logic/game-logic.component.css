@@ -18,3 +18,12 @@
   background-color: blue;
   position: absolute;
 }
+
+.scoreSquare{
+  border-radius: 0%;
+  display: flex;
+  border: solid black 1px;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
