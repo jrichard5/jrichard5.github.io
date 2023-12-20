@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-game-logic',
@@ -12,8 +13,10 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   width : number = 20
   movingDiv : movableDiv | undefined
   staticDivs : baseDiv[] = []
+  scoreDivs : baseDiv[] = [];
   interval : any 
   containerWidth : number = 0
+  scoreBoard: Map<string, number> = new Map();
 
   constructor(private el: ElementRef, private render: Renderer2){}
   ngAfterViewInit(): void {
@@ -32,6 +35,21 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     clearInterval(this.interval);
   }
 
+
+  dropPlayerPiece(){
+    if(!this.movingDiv){
+    const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer') ;
+    this.containerWidth = container?.clientWidth ?? 0
+    let middleForCircle = (this.containerWidth / 2) - (this.width / 2);
+    const newMoveableDiv = this.render.createElement('div');
+    newMoveableDiv.setAttribute('style', `left:${middleForCircle}px; top: 0px; width: ${this.width}px; height: ${this.width}px`)
+    newMoveableDiv.classList.add('collidable');
+    this.render.appendChild(container, newMoveableDiv)
+    this.movingDiv = new movableDiv(newMoveableDiv);
+
+    this.interval = setInterval(() => this.redrawMovingDiv(), 50);
+    }
+  }
   //Firefox guide
   //https://jsfiddle.net/jlr7245/teb4znk0/20/
   setup() : void {
@@ -41,11 +59,11 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     let middleForCircle = (this.containerWidth / 2) - (this.width / 2);
 
 
-    const newMoveableDiv = this.render.createElement('div');
-    newMoveableDiv.setAttribute('style', `left:${middleForCircle}px; top: 0px; width: ${this.width}px; height: ${this.width}px`)
-    newMoveableDiv.classList.add('collidable');
-    this.render.appendChild(container, newMoveableDiv)
-    this.movingDiv = new movableDiv(newMoveableDiv);
+    // const newMoveableDiv = this.render.createElement('div');
+    // newMoveableDiv.setAttribute('style', `left:${middleForCircle}px; top: 0px; width: ${this.width}px; height: ${this.width}px`)
+    // newMoveableDiv.classList.add('collidable');
+    // this.render.appendChild(container, newMoveableDiv)
+    // this.movingDiv = new movableDiv(newMoveableDiv);
     
 
     // const staticDiv = this.render.createElement('div');
@@ -57,7 +75,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     this.setupStaticCricles();
 
 
-    this.interval = setInterval(() => this.redrawMovingDiv(), 100);
+    //this.interval = setInterval(() => this.redrawMovingDiv(), 100);
     
   }
 
@@ -67,9 +85,9 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     if (this.staticDivs && this.movingDiv){
       this.staticDivs.forEach(staticDiv => {
       if (this.movingDiv){
-        if (this.movingDiv.top > 500 - this.width){
-          this.movingDiv.top =  10;
-        }
+        // if (this.movingDiv.top > 500 - this.width){
+        //   this.movingDiv.top =  10;
+        // }
         const dx = staticDiv.left - this.movingDiv.left
         const dy = staticDiv.top - this.movingDiv.top
         const distance = Math.sqrt(dx*dx + dy*dy)
@@ -94,16 +112,65 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     }
   }
 
+  scoreCollideFucntion(){
+    let hasJustCollided = false;
+    const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer') ;
+    if (this.scoreDivs && this.movingDiv){
+      let firstDiv = this.scoreDivs.at(0);
+      if (firstDiv && firstDiv.top > this.movingDiv.top+this.width){
+        //do nothing
+      }
+      else if(firstDiv && this.movingDiv.top + this.width > firstDiv.top + (this.width*3)){
+        let div = this.scoreDivs.find( item => item.left < this.movingDiv!.left  && (item.left + (this.width * 3)) > (this.movingDiv!.left + this.width))
+        if(div){
+          let score = this.scoreBoard.get(div.ref.innerHTML) ?? 0
+          this.scoreBoard.set(div.ref.innerHTML, score+1);
+          console.log(this.scoreBoard);
+          clearInterval(this.interval);
+          this.render.removeChild(container, this.movingDiv.ref)
+          this.movingDiv = undefined;
+        }
+        else{
+          let score = this.scoreBoard.get("error") ?? 0;
+          this.scoreBoard.set("error", score+1);
+          console.log("something unexpected happened in the scoring function")
+        }
+        
+      }
+      else{
+        if(this.movingDiv.horiVelocity > 0){
+          //going right so check for right
+          this.scoreDivs.forEach(element =>{
+            let right = element.left + this.width*3
+            if (this.movingDiv && this.movingDiv.left < right && (this.movingDiv.left + this.width) > right){
+              this.movingDiv.horiVelocity = -2
+            }
+          })
+        }
+        else if(this.movingDiv.horiVelocity < 0){
+          this.scoreDivs.forEach(element =>{
+            if (this.movingDiv && this.movingDiv.left < element.left && (this.movingDiv.left + this.width) > element.left){
+              this.movingDiv.horiVelocity = 2
+            }
+          })
+        }
+        // let div = this.scoreDivs.find( item => item.left < this.movingDiv!.left  && (item.left + (this.width * 3)) > (this.movingDiv!.left + this.width))
+        // console.log(div?.ref.innerHTML);
+      }
+    }
+  }
+
   redrawMovingDiv() : void {
     if(this.movingDiv){
       this.movingDiv.onTick();
       this.movingDiv.ref.setAttribute('style', `height:${this.width}px; width:${this.width}px; left:${this.movingDiv.left}px; top: ${this.movingDiv.top}px; background-color: red;`);
       this.collideFunction();
+      this.scoreCollideFucntion();
     }
   }
 
   setupStaticCricles() : void {
-    const howManyRows = 6;
+    const howManyRows = 3;
     for(let i = 0; i<howManyRows; i++){
       if(i % 2 == 0){
         this.setupEvenStaticCircles(i);
@@ -196,10 +263,12 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
       for(let i = 0; i< (rowNumber); i++){
         const staticDiv = this.render.createElement('div');
         staticDiv.innerHTML = (i+1).toString();
+        this.scoreBoard.set((i+1).toString(), 0);
         staticDiv.setAttribute('style', `left:${leftPixel}px; top: ${rowHeight}px; width: ${spaceInBetween}px; height: ${spaceInBetween}px`)
         leftPixel = leftPixel + spaceInBetween;
         staticDiv.classList.add('scoreSquare')
         this.render.appendChild(container, staticDiv);
+        this.scoreDivs.push(new baseDiv(staticDiv));
         //this.staticDivs?.push(new baseDiv(staticDiv));
       }
     }
@@ -209,10 +278,12 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
       for(let i = 0; i < (rowNumber); i++){
         const staticDiv = this.render.createElement('div');
         staticDiv.innerHTML = (i+1).toString();
+        this.scoreBoard.set((i+1).toString(), 0);
         staticDiv.setAttribute('style', `left:${leftPixel}px; top: ${rowHeight}px; width: ${spaceInBetween}px; height: ${spaceInBetween}px`)
         leftPixel = leftPixel + spaceInBetween;
         staticDiv.classList.add('scoreSquare')
         this.render.appendChild(container, staticDiv);
+        this.scoreDivs.push(new baseDiv(staticDiv));
         
       }
     }
@@ -260,6 +331,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
 
 class baseDiv {
 
+  ref : HTMLElement
   left : number
   top : number
   radius : number
@@ -267,18 +339,19 @@ class baseDiv {
 
  constructor(ref : HTMLElement){
   
+  this.ref = ref;
   this.radius = ref.getBoundingClientRect().height / 2;
   let leftString : number = parseFloat(parseFloat(window.getComputedStyle(ref).getPropertyValue("left").replace(/px/g, '')).toFixed(2));
   this.left = leftString
-  console.log(this.left);
+  //console.log(this.left);
   let topString : number = parseFloat(parseFloat(window.getComputedStyle(ref).getPropertyValue("top").replace(/px/g, '')).toFixed(2));
   this.top = topString
-  console.log(window.getComputedStyle(ref).getPropertyValue("top").replace(/px/g, ''));
+  //console.log(window.getComputedStyle(ref).getPropertyValue("top").replace(/px/g, ''));
 
  }
 }
  class movableDiv extends baseDiv{
-  ref : HTMLElement
+  //ref : HTMLElement
   downVelocity: number;
   horiVelocity: number;
   constructor(ref : HTMLElement){

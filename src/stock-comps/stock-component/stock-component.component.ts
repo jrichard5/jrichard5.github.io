@@ -43,6 +43,7 @@ export class StockComponentComponent implements OnInit, OnDestroy {
       this.vixInfoPast = data.VixStocks;
       this.aaplInfoCurrent.name = this.aaplInfoPast!.name;
       this.aaplInfoCurrent.quantity = this.aaplInfoPast!.quantity;
+
       this.vixInfoCurrent.name = this.vixInfoPast!.name;
       this.vixInfoCurrent.quantity = this.vixInfoPast!.quantity;
       this.aaplPastTotal = this.aaplInfoPast.price * this.aaplInfoPast.quantity;
@@ -51,7 +52,7 @@ export class StockComponentComponent implements OnInit, OnDestroy {
     );
 
     this.marketDataSub$ = this.http.get<any>('https://api.marketdata.app/v1/stocks/quotes/AAPL/').subscribe(data => {
-      this.aaplInfoCurrent.price = data.mid;
+      this.aaplInfoCurrent.price = data.bid;
       console.log(data);
     })
 
