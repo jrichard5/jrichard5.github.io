@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { elementAt } from 'rxjs';
 
 @Component({
@@ -17,6 +17,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   interval : any 
   containerWidth : number = 0
   scoreBoard: Map<string, number> = new Map();
+  @Output()
+  scoreBoardEvent = new EventEmitter<Map<string, number>>();
 
   constructor(private el: ElementRef, private render: Renderer2){}
   ngAfterViewInit(): void {
@@ -125,6 +127,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
         if(div){
           let score = this.scoreBoard.get(div.ref.innerHTML) ?? 0
           this.scoreBoard.set(div.ref.innerHTML, score+1);
+          this.scoreBoardEvent.emit(this.scoreBoard);
           console.log(this.scoreBoard);
           clearInterval(this.interval);
           this.render.removeChild(container, this.movingDiv.ref)
@@ -287,6 +290,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
         
       }
     }
+    this.scoreBoardEvent.emit(this.scoreBoard);
   }
 
   findNewVelocties(dx: number, dy: number) : [number, number]{

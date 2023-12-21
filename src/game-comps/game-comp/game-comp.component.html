@@ -1,7 +1,9 @@
 <div id="centerContainer">
     <div id="emptySpacePregame">empty</div>
     <div id="game">
-        <app-game-logic></app-game-logic>
+        <app-game-logic (scoreBoardEvent)="updateScoreBoard($event)"></app-game-logic>
     </div>
-    <div id="gameFromDiv">form</div>
+    <div id="gameFromDiv">
+        <app-game-form [scoreBoard]="scoreBoard"></app-game-form>
+    </div>
 </div>

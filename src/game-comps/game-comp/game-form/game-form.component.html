@@ -1,1 +1,11 @@
 <p>game-form works!</p>
+<table>
+    <tr>
+        <th>Value</th>
+        <th>Score</th>
+    </tr>
+    <tr *ngFor="let oneEntry of scoreBoard | keyvalue; let i = index">
+        <td>{{oneEntry.key}}</td>
+        <td >{{oneEntry.value}} <span attr.id="rowThingy{{oneEntry.key}}">+1</span></td>
+    </tr>
+</table>

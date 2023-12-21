@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class GameCompComponent {
 
+  scoreBoard : Map<string, number> | undefined
+
+  updateScoreBoard(newMap: Map<string, number>){
+    this.scoreBoard = newMap;
+    console.log(this.scoreBoard);
+  }
 }
