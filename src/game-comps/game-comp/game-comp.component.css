@@ -1,4 +1,9 @@
 #centerContainer{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    margin-left: -25%;
+    margin-right: -25%;
+}
+.sideOption{
+    width: 10%;
 }

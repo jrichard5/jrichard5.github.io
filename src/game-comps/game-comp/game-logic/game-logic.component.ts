@@ -19,6 +19,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   scoreBoard: Map<string, number> = new Map();
   @Output()
   scoreBoardEvent = new EventEmitter<Map<string, number>>();
+  @Output()
+  scoreBoardStringChange = new EventEmitter<string>();
 
   constructor(private el: ElementRef, private render: Renderer2){}
   ngAfterViewInit(): void {
@@ -128,7 +130,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
           let score = this.scoreBoard.get(div.ref.innerHTML) ?? 0
           this.scoreBoard.set(div.ref.innerHTML, score+1);
           this.scoreBoardEvent.emit(this.scoreBoard);
-          console.log(this.scoreBoard);
+          this.scoreBoardStringChange.emit(div.ref.innerHTML);
           clearInterval(this.interval);
           this.render.removeChild(container, this.movingDiv.ref)
           this.movingDiv = undefined;

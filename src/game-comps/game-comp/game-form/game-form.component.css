@@ -1,0 +1,19 @@
+.plusOne{
+    color: green;
+    position: absolute;
+}
+.plusOneContainer{
+    position: relative;
+    display: inline;
+}
+
+tr{
+    text-align: center;
+}
+
+form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 220px;
+}

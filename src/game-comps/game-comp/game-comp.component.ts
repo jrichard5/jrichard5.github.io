@@ -8,9 +8,12 @@ import { Component } from '@angular/core';
 export class GameCompComponent {
 
   scoreBoard : Map<string, number> | undefined
+  keyString  : string | undefined
 
   updateScoreBoard(newMap: Map<string, number>){
     this.scoreBoard = newMap;
-    console.log(this.scoreBoard);
+  }
+  newScore(stringKey : string){
+    this.keyString = stringKey;
   }
 }
