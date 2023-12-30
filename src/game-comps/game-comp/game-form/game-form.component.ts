@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms'
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { formInfoInterface } from 'src/game-comps/gameInterfaces/formUpdates';
 
 
 @Component({
@@ -40,6 +41,14 @@ export class GameFormComponent implements OnInit{
 
   isAnimateInProgress : boolean = false;
 
+  formInfo : formInfoInterface = {
+    msPerTick : 50,
+    numberOfRows : 5
+  }
+
+  @Output()
+  formEventChange = new EventEmitter<formInfoInterface>();
+
   @Input()
   scoreBoard: Map<string, number> | undefined
 
@@ -54,12 +63,15 @@ export class GameFormComponent implements OnInit{
   }
 
   formForGame !: FormGroup
+
+
+
   constructor(private fb: FormBuilder){}
 
   ngOnInit(){
     this.formForGame = this.fb.group({
       msPerTick: new FormControl("50",[Validators.required, Validators.max(2001), Validators.min(30), Validators.pattern("^[0-9]*$")]),
-      numberOfRows: ['5', [Validators.required, Validators.max(7), Validators.min(2), Validators.pattern("^[0-9]*$")]]
+      numberOfRows: ["5", [Validators.required, Validators.max(7), Validators.min(2), Validators.pattern("^[0-9]*$")]]
     })
   }
 
@@ -68,8 +80,15 @@ export class GameFormComponent implements OnInit{
   }
 
   changeValues(){
-    console.log("hi");
-    console.log(this.formForGame.invalid)
+    let ms = parseInt(this.formForGame.get("msPerTick")?.value)
+    let rows = parseInt(this.formForGame.get("numberOfRows")?.value)
+    if (ms && rows){
+      this.formInfo = {
+        msPerTick : ms,
+        numberOfRows : rows
+      }
+      this.formEventChange.emit(this.formInfo);
+    }
   }
 
 

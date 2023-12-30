@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy, ElementRef, Renderer2, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2, AfterViewInit, EventEmitter, Output, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { elementAt } from 'rxjs';
+import { formInfoInterface } from 'src/game-comps/gameInterfaces/formUpdates';
 
 @Component({
   selector: 'app-game-logic',
   templateUrl: './game-logic.component.html',
   styleUrls: ['./game-logic.component.css']
 })
-export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
+export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges{
   
   
 
@@ -21,11 +22,13 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   scoreBoardEvent = new EventEmitter<Map<string, number>>();
   @Output()
   scoreBoardStringChange = new EventEmitter<string>();
+  @Input()
+  formInfo : formInfoInterface | undefined
 
   constructor(private el: ElementRef, private render: Renderer2){}
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.setup();
+      this.setup(5);
     }, 300);
     
   }
@@ -38,7 +41,34 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   ngOnDestroy(): void {
     clearInterval(this.interval);
   }
+  
+  ngOnChanges(changes : SimpleChanges){
+    let change = changes["formInfo"]
+    if(change && !change.isFirstChange()){
+      this.resetGame(change.currentValue["numberOfRows"]);
+    }
+  }
 
+
+  resetGame(rows : number){
+    const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer') ;
+    clearInterval(this.interval)
+    if(this.movingDiv){
+      this.render.removeChild(container, this.movingDiv.ref)
+      this.movingDiv = undefined
+    }
+    
+    this.staticDivs.forEach(element => {
+      this.render.removeChild(container, element.ref)
+    });
+    this.staticDivs = []
+    this.scoreDivs.forEach(element => {
+      this.render.removeChild(container, element.ref)
+    })
+    this.scoreDivs = []
+    this.setup(rows)
+
+  }
 
   dropPlayerPiece(){
     if(!this.movingDiv){
@@ -51,12 +81,12 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     this.render.appendChild(container, newMoveableDiv)
     this.movingDiv = new movableDiv(newMoveableDiv);
 
-    this.interval = setInterval(() => this.redrawMovingDiv(), 50);
+    this.interval = setInterval(() => this.redrawMovingDiv(), this.formInfo?.msPerTick ?? 50);
     }
   }
   //Firefox guide
   //https://jsfiddle.net/jlr7245/teb4znk0/20/
-  setup() : void {
+  setup(rows : number) : void {
     console.log("fromSetup");
     const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer') ;
     this.containerWidth = container?.clientWidth ?? 0
@@ -76,7 +106,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     // this.render.appendChild(container, staticDiv);
     // this.staticDivs?.push(new baseDiv(staticDiv));
 
-    this.setupStaticCricles();
+    this.setupStaticCricles(rows);
 
 
     //this.interval = setInterval(() => this.redrawMovingDiv(), 100);
@@ -103,8 +133,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
           let velocities = this.findNewVelocties( dx, dy)
           this.movingDiv.horiVelocity = velocities[0];
           this.movingDiv.downVelocity = velocities[1];
-          if(this.movingDiv.downVelocity >= -1){
-            this.movingDiv.downVelocity = -1;
+          if(this.movingDiv.downVelocity >= -0.4 && this.movingDiv.downVelocity < 1){
+            this.movingDiv.downVelocity = -0.4;
             this.movingDiv.top = staticDiv.top - this.width;
           }
         }
@@ -174,8 +204,8 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
     }
   }
 
-  setupStaticCricles() : void {
-    const howManyRows = 3;
+  setupStaticCricles(rows : number) : void {
+    const howManyRows = rows;
     for(let i = 0; i<howManyRows; i++){
       if(i % 2 == 0){
         this.setupEvenStaticCircles(i);
@@ -257,6 +287,7 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
 
   setupScoreSquares(rowNumber : number) : void {
     //not rowNumber + 1 because other functions start at rowNumber = 0;
+    this.scoreBoard.clear()
     let rowHeight = 100 + ((rowNumber) * (this.width * 3)) - (this.width)
     const container : HTMLElement = this.el.nativeElement.querySelector('.gameContainer');
     let middleForCircle = (this.containerWidth / 2);
@@ -298,27 +329,33 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit{
   findNewVelocties(dx: number, dy: number) : [number, number]{
     let returnArray : [number, number]= [0, 0]
     if (dx == 0){
-      let randomValue = this.getRandomArbitrary(-1, 1) * 7;
-      if (randomValue > -4 && randomValue < 4){
-        randomValue = this.getRandomArbitrary(-1, 1) * 7;
+      let randomValue = this.getRandomArbitrary(-10, 10);
+      console.log(randomValue)
+      if (randomValue > 0){
+        randomValue = this.getRandomArbitrary(2, 4);
+      }
+      else{
+        randomValue = this.getRandomArbitrary(-4, -2);
       }
       returnArray[0] = randomValue;
     }
     else if(dx < 0){
-      returnArray[0] = this.getRandomArbitrary(1, 3) * 4
+      returnArray[0] = this.getRandomArbitrary(3, 4)
     }
     else if (dx > 0){
-      returnArray[0] = this.getRandomArbitrary(-3, 1) * 4;
+      returnArray[0] = this.getRandomArbitrary(-4, -3);
     }
 
-    if(dy > (this.width) - (this.width / 10)){
-      returnArray[1] = this.getRandomArbitrary(1, 3) * 3
+    // dy > 18  (moving div is above static div by 18 pixs)
+    if(dy > (this.width) - (this.width / 5)){
+      returnArray[1] = this.getRandomArbitrary(-3, -2)
     }
-    else if(dy > (this.width) - (this.width / 5)){
-      returnArray[1] = this.getRandomArbitrary(1, 2) * 3
+    // dy > 10 (moving div is above static div by 10 pixs)
+    else if(dy > (this.width) - (this.width / 2)){
+      returnArray[1] = this.getRandomArbitrary(-2, -1)
     }
     else if (dy < 0){
-      returnArray[1] = -2;
+      returnArray[1] = 2;
     }
     else{
       returnArray[1] = 1;
@@ -369,25 +406,26 @@ class baseDiv {
   }
 
   onTick() : void {
+    let horiChange = 0.2
       if (this.downVelocity < 5){
-        this.downVelocity = this.downVelocity + 1
+        this.downVelocity = this.downVelocity + 0.4
       }
       if (this.horiVelocity > 0){
-        if (this.horiVelocity < 1){
+        if (this.horiVelocity < horiChange){
           this.horiVelocity = 0;
         }
         else{
-          this.horiVelocity = this.horiVelocity - 1;
+          this.horiVelocity = this.horiVelocity - horiChange;
         }
         
       }
       //if going left, need to make it go right a little bit
       if (this.horiVelocity < 0){
-        if (this.horiVelocity > -1){
+        if (this.horiVelocity > -horiChange){
           this.horiVelocity = 0
         }
         else{
-          this.horiVelocity = this.horiVelocity + 1;
+          this.horiVelocity = this.horiVelocity + horiChange;
         }
         
       }
