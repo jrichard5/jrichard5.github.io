@@ -29,3 +29,47 @@ h2{
 #contactInfoSection a{
     padding: 0px 8px;
 }
+.liPic{
+    width:57px;
+    height :50px;
+}
+
+.gitPic{
+    width: 50px;
+    height :50px;
+}
+
+@media only screen and (max-width: 1000px){
+    #emptyHeaderSpace{
+        width: 25%;
+    }
+    h1{
+        font-size:24pt;
+        padding: 5% 0%;
+        line-height: 100%;
+    }
+    h2{
+        font-size: 2.5vw;
+        line-height: 100%;
+    }
+    #contactInfoSection{
+        text-align: right;
+        margin-top: auto;
+        width: 25%;
+    }
+    #contactInfoSection a{
+        padding: 0px 4px;
+    }
+    .liPic{
+        width:28px;
+        height :25px;
+    }
+    
+    .gitPic{
+        width: 25px;
+        height :25px;
+    }
+    p{
+        font-size: 1.5vw;
+    }
+}

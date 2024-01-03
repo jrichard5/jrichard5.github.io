@@ -59,3 +59,59 @@ button{
     display: hide;
     transition: opacity 2s;
 }
+
+.priceCardDivs{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+@media only screen and (max-width: 1000px){
+
+    #bigContainer{
+        flex-direction: column;
+        margin: 10% 0%;
+        width: auto;
+    }
+    hr{
+        width: 90%;
+    }
+    app-stock-info-card{
+        width: 30%;
+        margin: 2% 0%;
+        transition:  margin 2s;
+        
+    }
+    .PriceDiv{
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 10% 0%;
+    
+    }
+    button{
+        margin: 0% auto;
+        background-color: #151f4d;
+        color: white;
+        padding: 2%;
+        border-radius: 16px;
+        opacity: 0;
+        display: hide;
+        transition: opacity 2s;
+    }
+
+    .priceH2Divs{
+        flex-direction: column;
+    }
+
+    .priceCardDivs{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    
+}

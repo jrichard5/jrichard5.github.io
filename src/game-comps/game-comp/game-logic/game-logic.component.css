@@ -22,8 +22,14 @@
 .scoreSquare{
   border-radius: 0%;
   display: flex;
-  border: solid black 1px;
+  border: solid black 2px;
+  border-left: none;
+  border-top: none;
   position: absolute;
   align-items: center;
   justify-content: center;
+}
+.firstScoreSquare{
+  border-left: solid black 2px;
+  border-right: solid black 2px;
 }

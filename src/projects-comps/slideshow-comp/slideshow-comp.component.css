@@ -72,3 +72,41 @@ button:hover{
 .hide{
     display: none;
 }
+
+mat-spinner{
+    margin: 0% auto;
+}
+
+
+@media only screen and (max-width: 1000px){
+    #slideShowContainer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 10% -8%
+    }
+    #pictureForSlideShowContainer{
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        order: 3;
+    }
+    #descriptionForSlideShow{
+        width: 100%;
+        padding: 4px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        order: 4;
+    }
+    button{
+        order: 1;
+        width: 50%;
+        border: solid 1px #888888;
+    }
+    #pictureForSlideShow{
+        margin-left: none;
+        margin-right: none;
+    }
+
+}

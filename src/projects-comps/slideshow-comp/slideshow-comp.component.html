@@ -6,7 +6,7 @@
     <h2>{{currentProject?.projectTitle}}</h2>
 
     <div id="slideShowContainer">
-        <button (click)="leftButtonHandler()">left</button>
+        <button (click)="leftButtonHandler()"><</button>
         <div id="pictureForSlideShowContainer">
             <div id="pictureForSlideShow">
                 <img id="pic" [src]="currentSlide?.picture" (click)="enlargeImg()">
@@ -19,7 +19,7 @@
                 <li *ngFor="let list of currentDescriptionArray"> {{list}}</li>
             </ul>
         </div>  
-        <button (click)="rightButtonHandler()">right</button>
+        <button (click)="rightButtonHandler()">></button>
     </div>
 </div>
 

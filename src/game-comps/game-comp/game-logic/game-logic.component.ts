@@ -302,7 +302,13 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit, OnC
         this.scoreBoard.set((i+1).toString(), 0);
         staticDiv.setAttribute('style', `left:${leftPixel}px; top: ${rowHeight}px; width: ${spaceInBetween}px; height: ${spaceInBetween}px`)
         leftPixel = leftPixel + spaceInBetween;
-        staticDiv.classList.add('scoreSquare')
+        if(i == 0){
+          staticDiv.classList.add('firstScoreSquare')
+          staticDiv.classList.add('scoreSquare')
+        }
+        else{
+          staticDiv.classList.add('scoreSquare')
+        }
         this.render.appendChild(container, staticDiv);
         this.scoreDivs.push(new baseDiv(staticDiv));
         //this.staticDivs?.push(new baseDiv(staticDiv));
@@ -317,7 +323,13 @@ export class GameLogicComponent implements OnInit, OnDestroy, AfterViewInit, OnC
         this.scoreBoard.set((i+1).toString(), 0);
         staticDiv.setAttribute('style', `left:${leftPixel}px; top: ${rowHeight}px; width: ${spaceInBetween}px; height: ${spaceInBetween}px`)
         leftPixel = leftPixel + spaceInBetween;
-        staticDiv.classList.add('scoreSquare')
+        if(i == 0){
+          staticDiv.classList.add('firstScoreSquare')
+          staticDiv.classList.add('scoreSquare')
+        }
+        else{
+          staticDiv.classList.add('scoreSquare')
+        }
         this.render.appendChild(container, staticDiv);
         this.scoreDivs.push(new baseDiv(staticDiv));
         

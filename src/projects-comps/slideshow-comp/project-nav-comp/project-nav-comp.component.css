@@ -5,7 +5,7 @@ div{
     justify-content: space-around;
     background-color: black;
     margin-top: 3%;
-    padding: 16px;
+    padding: 0.5%;
     border-radius: 32px;
 }
 button{
@@ -15,6 +15,7 @@ button{
     border: none;
     padding: 16px 64px;
     border-radius: 16px;
+    margin: 2% 0%;
 }
 
 button:hover{

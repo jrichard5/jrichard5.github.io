@@ -2,9 +2,13 @@
 <div id="bigContainer">
     <div id="section1">
         <div id="pastPriceDiv" class="PriceDiv" *ngIf="jsonSubscription$.closed && showCards">
-            <h2>Past</h2>
-            <app-stock-info-card [stockCardInfo]="aaplInfoPast" [pastTotal]="aaplPastTotal"></app-stock-info-card>
-            <app-stock-info-card [stockCardInfo]="vixInfoPast" [pastTotal]="vixPastTotal"></app-stock-info-card>
+            <div class="priceH2Divs">
+                <h2>Past</h2>
+            </div>
+            <div class="priceCardDivs">
+                <app-stock-info-card [stockCardInfo]="aaplInfoPast" [pastTotal]="aaplPastTotal"></app-stock-info-card>
+                <app-stock-info-card [stockCardInfo]="vixInfoPast" [pastTotal]="vixPastTotal"></app-stock-info-card>
+            </div>
         </div>
         <div id="graph" *ngIf="!showCards">
             <app-stock-graph [codeForGraph]="currentCard"></app-stock-graph>
@@ -13,10 +17,15 @@
     <hr>
     
     <div id="currentPriceDiv" class="PriceDiv">
-        <h2>Current</h2>
-        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub$.closed" [stockCardInfo]="aaplInfoCurrent" [pastTotal]="aaplPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin clickableStockCard" ></app-stock-info-card>
-        <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub2$.closed" [stockCardInfo]="vixInfoCurrent" [pastTotal]="vixPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin clickableStockCard"></app-stock-info-card>
-        <button (click)="reverseStyleChilkHandler()">Total Cards</button>
+        <div class="priceH2Div">
+            <h2>Current</h2>
+        </div>
+        <div class="priceCardDivs">
+            <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub$.closed" [stockCardInfo]="aaplInfoCurrent" [pastTotal]="aaplPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin clickableStockCard" ></app-stock-info-card>
+            <app-stock-info-card *ngIf="jsonSubscription$.closed && marketDataSub2$.closed" [stockCardInfo]="vixInfoCurrent" [pastTotal]="vixPastTotal" (codeSelected)="codeSelectedHandler($event)" class="autoMargin clickableStockCard"></app-stock-info-card>
+        </div>
+            <button (click)="reverseStyleChilkHandler()">Total Cards</button>
+        
     </div>
 
 </div>

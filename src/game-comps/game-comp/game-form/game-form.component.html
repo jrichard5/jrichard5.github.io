@@ -1,23 +1,26 @@
-<table>
-    <tr>
-        <th>Value</th>
-        <th>Score</th>
-    </tr>
-    <tr *ngFor="let oneEntry of scoreBoard | keyvalue; let i = index">
-        <td>{{oneEntry.key}}</td>
-        <!-- <td >{{oneEntry.value}} <span attr.id="rowThingy{{oneEntry.key}}" [ngClass]="{'a': oneEntry.key === recentScoreChange}">+1</span></td> -->
-        <!-- <td >{{oneEntry.value}} <span attr.id="rowThingy{{oneEntry.key}}" @[addOne]="oneEntry.key == recentScoreChange">+1</span></td> -->
-        <td >{{oneEntry.value}} <div class="plusOneContainer"><span @addOne *ngIf="oneEntry.key == recentScoreChange && isAnimateInProgress" (@addOne.done)="onAnimationEvent($event)" class="plusOne">+1</span></div></td>
-    </tr>
-</table>
-<div>
+<div id="gameFormComponentDiv">
+<div id="gameScoreTableDiv" class="formDivs">
+    <table>
+        <tr>
+            <th>Value</th>
+            <th>Score</th>
+        </tr>
+        <tr *ngFor="let oneEntry of scoreBoard | keyvalue; let i = index">
+            <td>{{oneEntry.key}}</td>
+            <!-- <td >{{oneEntry.value}} <span attr.id="rowThingy{{oneEntry.key}}" [ngClass]="{'a': oneEntry.key === recentScoreChange}">+1</span></td> -->
+            <!-- <td >{{oneEntry.value}} <span attr.id="rowThingy{{oneEntry.key}}" @[addOne]="oneEntry.key == recentScoreChange">+1</span></td> -->
+            <td >{{oneEntry.value}} <div class="plusOneContainer"><span @addOne *ngIf="oneEntry.key == recentScoreChange && isAnimateInProgress" (@addOne.done)="onAnimationEvent($event)" class="plusOne">+1</span></div></td>
+        </tr>
+    </table>
+</div>
+<div class="formDivs">
     <form [formGroup]="formForGame" (ngSubmit)="changeValues()">
     <mat-form-field appearance="outline">
-        <mat-label >Milliseconds per tick</mat-label>
+        <mat-label >Milliseconds per tick(30-2000)</mat-label>
         <input matInput type="text" formControlName="msPerTick">
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-label>Number of Rows (3-6)</mat-label>
+        <mat-label>Number of Rows (2-6)</mat-label>
         <input matInput type="text" formControlName="numberOfRows" >
     </mat-form-field>
     <div>
@@ -26,4 +29,5 @@
     
     </form>
     <!-- <form [formGroup]="formForGame"></form>  formControlName="msPerTick" formControlName="numberOfRows"-->
+</div>
 </div>

@@ -5,6 +5,7 @@ import { stockCardInfo } from './stockInterfaces/stockCardInterface';
 import { HttpClient } from '@angular/common/http';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { formatDate } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 @Component({
   selector: 'app-stock-component',
@@ -29,7 +30,7 @@ export class StockComponentComponent implements OnInit, OnDestroy {
   showCards : boolean = true;
   currentCard : string = "";
 
-  constructor(private json: ReadJsonServiceService, private http : HttpClient){
+  constructor(private json: ReadJsonServiceService, private http : HttpClient, private screenSize: BreakpointObserver){
 
   }
   
@@ -60,7 +61,6 @@ export class StockComponentComponent implements OnInit, OnDestroy {
       this.vixInfoCurrent.price = data.last;
       console.log(data);
     })
-
 
     // this.jsonSubscription$ = this.json.getAssetJsonFunction().subscribe({
     //   next: () =>{
@@ -101,16 +101,19 @@ export class StockComponentComponent implements OnInit, OnDestroy {
     let totalButton = document.querySelector("#currentPriceDiv")?.querySelector("button");
     this.showCards = false;
     
-    if (currentPriceDiv){
-      currentPriceDiv.style.width = "25%";
-      currentPriceCard?.forEach((card) => {
-        (card as HTMLElement).style.margin = "3% 0%";
-      })
+    if (window.innerWidth > 1000){
+      if (currentPriceDiv){
+        currentPriceDiv.style.width = "25%";
+        currentPriceCard?.forEach((card) => {
+          (card as HTMLElement).style.margin = "3% 0%";
+        })
+      }
     }
-    if (totalButton){
-      totalButton.style.display = "relative";
-      totalButton.style.opacity = "1";
-    }
+      if (totalButton){
+        totalButton.style.display = "relative";
+        totalButton.style.opacity = "1";
+      }
+    
   }
 
   reverseStyleChilkHandler(){
@@ -118,16 +121,20 @@ export class StockComponentComponent implements OnInit, OnDestroy {
     let currentPriceCard = document.querySelector("#currentPriceDiv")?.querySelectorAll("app-stock-info-card")
     let totalButton = document.querySelector("#currentPriceDiv")?.querySelector("button");
     this.showCards = true;
-    if (currentPriceDiv){
-      currentPriceDiv.style.width = "100%";
-      currentPriceCard?.forEach((card) => {
-        (card as HTMLElement).style.margin = "10% 0%";
-      })
+    
+    if(window.outerWidth > 1000){
+      if (currentPriceDiv){
+        currentPriceDiv.style.width = "100%";
+        currentPriceCard?.forEach((card) => {
+          (card as HTMLElement).style.margin = "10% 0%";
+        })
+      }
     }
-    if (totalButton){
-      totalButton.style.display = "hidden";
-      totalButton.style.opacity = "0";
-    }
+      if (totalButton){
+        totalButton.style.display = "hidden";
+        totalButton.style.opacity = "0";
+      }
+    
   }
 
   

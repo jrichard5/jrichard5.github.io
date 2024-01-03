@@ -7,3 +7,17 @@
 .sideOption{
     width: 10%;
 }
+
+
+@media only screen and (max-width: 1000px){
+    #centerContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .sideOption{
+        width: 100%;
+    }
+
+
+}

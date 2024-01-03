@@ -18,6 +18,7 @@ import { formInfoInterface } from 'src/game-comps/gameInterfaces/formUpdates';
         animate(2000, style({opacity: 0}))
       ])
     ])
+  ]
 
   //   trigger('addOne', [
   //   state('hidden', style({
@@ -35,7 +36,6 @@ import { formInfoInterface } from 'src/game-comps/gameInterfaces/formUpdates';
   //     animate(1000)
   // ]),
   // ]),
-  ]
 })
 export class GameFormComponent implements OnInit{
 

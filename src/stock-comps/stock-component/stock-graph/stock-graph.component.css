@@ -7,6 +7,11 @@ canvasjs-chart{
     width: 100%;
 }
 
+.someExtraSpacing{
+    padding: 20% 0%;
+}
+
 mat-spinner{
     margin: 0% auto;
+    
 }
