@@ -5,7 +5,7 @@ https://jrichard5.github.io/about
 
 Made with Angular 16
 
-##Sections
+## Sections
 * About Me
 * Projects (slideshow)
 * Stock Exercise
